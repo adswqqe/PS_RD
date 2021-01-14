@@ -29,8 +29,8 @@ public abstract class CustomFSMStateBase : IFSMStateBase
 
 public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 {
-    private UnitBase _unit = null;
-    public UnitBase Unit => _unit;
+    private Unit _unit = null;
+    public Unit Unit => _unit;
 
     private class IdleState : CustomFSMStateBase
     {
@@ -40,14 +40,29 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
         public override void EndState()
         {
+            Debug.Log("IdleState End");
         }
 
         public override void StartState()
         {
+            if (SystemMgr.Unit == null)
+                return;
+
+            SystemMgr.Unit.StopMove();
+
+            Debug.Log("IdleState Start");
         }
 
         public override void Update()
         {
+            //if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+            //    SystemMgr.ChangeState(CustomFSMState.Move);
+
+            SystemMgr.Unit.Progress();
+            SystemMgr.Unit.Idle();
+
+            if (Input.GetAxisRaw("Horizontal") != 0)
+                SystemMgr.ChangeState(CustomFSMState.Move);
         }
     }
 
@@ -57,14 +72,27 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
         public override void EndState()
         {
+            Debug.Log("MoveState End");
         }
 
         public override void StartState()
         {
+            if (SystemMgr.Unit._StopMoveCoroutine != null)
+                SystemMgr.Unit.StopCoroutine(SystemMgr.Unit._StopMoveCoroutine);
+
+            Debug.Log("MoveState Start");
         }
 
         public override void Update()
         {
+            SystemMgr.Unit.Progress();
+            SystemMgr.Unit.Move(Input.GetAxisRaw("Horizontal"));
+
+            if(Input.GetAxisRaw("Horizontal") == 0)
+                SystemMgr.ChangeState(CustomFSMState.Idle);
+
+            //if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+            //    SystemMgr.ChangeState(CustomFSMState.Idle);
         }
     }
 
@@ -114,7 +142,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         AddState(CustomFSMState.Attack, new AttackState(this));
     }
 
-    public void SetUnit(UnitBase unit)
+    public void SetUnit(Unit unit)
     {
         if (unit == null)
             return;

@@ -25,13 +25,12 @@ public abstract class UnitBase : MonoBehaviour
         _aniCtrl = GetComponentInChildren<AnimationCtrl>();
         _fsmSystem = GetComponentInChildren<CustomFSMSystem>();
 
-        FsmSystem.SetUnit(this);
         _isInit = true;
     }
 
     public abstract void Idle();
 
-    public abstract void Move();
+    public abstract void Move(float deltaX);
     
     public abstract void Attack();
 
