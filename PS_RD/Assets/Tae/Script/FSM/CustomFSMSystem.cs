@@ -63,6 +63,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
             if (Input.GetAxisRaw("Horizontal") != 0)
                 SystemMgr.ChangeState(CustomFSMState.Move);
+            else if (Input.GetKeyDown(KeyCode.C))
+                SystemMgr.ChangeState(CustomFSMState.Jump);
         }
     }
 
@@ -90,7 +92,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
             if(Input.GetAxisRaw("Horizontal") == 0)
                 SystemMgr.ChangeState(CustomFSMState.Idle);
-
+            if (Input.GetKeyDown(KeyCode.C))
+                SystemMgr.ChangeState(CustomFSMState.Jump);
             //if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
             //    SystemMgr.ChangeState(CustomFSMState.Idle);
         }
@@ -117,20 +120,56 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
     private class JumpState : CustomFSMStateBase
     {
+        float _addJumpPower = 1.5f;
+        float _jumpTimeCounter = 0.0f;
         public JumpState(CustomFSMSystem system) : base(system)
         {
         }
 
         public override void EndState()
         {
+            Debug.Log("JumpState End");
         }
 
         public override void StartState()
         {
+            if (SystemMgr.Unit.IsGround)
+            {
+                _addJumpPower = 0.2f;
+                _jumpTimeCounter = 0.35f;
+                SystemMgr.Unit.Jump(_addJumpPower);
+                Debug.Log("JumpState Start");
+            }
+            else
+            {
+                SystemMgr.ChangeState(CustomFSMState.Idle);
+            }
         }
 
         public override void Update()
         {
+            SystemMgr.Unit.Progress();
+            SystemMgr.Unit.Move(Input.GetAxisRaw("Horizontal"));
+
+            if (Input.GetKey(KeyCode.C))
+            {
+                if (_jumpTimeCounter > 0.0f)
+                    SystemMgr.Unit.Jump(_addJumpPower);
+                _jumpTimeCounter -= Time.deltaTime;
+            }
+
+            if (Input.GetKeyUp(KeyCode.C))
+            {
+                _jumpTimeCounter = 0;
+            }
+            
+            if (SystemMgr.Unit.IsGround)
+            {
+                if (Input.GetAxisRaw("Horizontal") == 0)
+                    SystemMgr.ChangeState(CustomFSMState.Idle);
+                else if (Input.GetAxisRaw("Horizontal") != 0)
+                    SystemMgr.ChangeState(CustomFSMState.Move);
+            }
         }
     }
 

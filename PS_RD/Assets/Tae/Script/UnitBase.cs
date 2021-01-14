@@ -34,5 +34,5 @@ public abstract class UnitBase : MonoBehaviour
     
     public abstract void Attack();
 
-    public abstract void Jump();
+    public abstract void Jump(float height);
 }
