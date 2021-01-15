@@ -4,10 +4,15 @@ using UnityEngine;
 
 public enum CustomFSMState
 {
-    Idle,
+    Idle = 0,
     Move,
-    Attack,
     Jump,
+    Attack,
+    Dash,
+    Hit,
+    Fall,
+    Contact,
+    DoubleJump,
 }
 
 public abstract class CustomFSMStateBase : IFSMStateBase
@@ -40,7 +45,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
         public override void EndState()
         {
-            Debug.Log("IdleState End");
+            //Debug.Log("IdleState End");
         }
 
         public override void StartState()
@@ -50,7 +55,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
             SystemMgr.Unit.StopMove();
 
-            Debug.Log("IdleState Start");
+            //Debug.Log("IdleState Start");
         }
 
         public override void Update()
@@ -70,11 +75,14 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
     private class MoveState : CustomFSMStateBase
     {
+        float _changeStateTimer = 0.25f;
+        bool _isStartStateTimer = false;
+
         public MoveState(CustomFSMSystem system) : base(system) { }
 
         public override void EndState()
         {
-            Debug.Log("MoveState End");
+            //Debug.Log("MoveState End");
         }
 
         public override void StartState()
@@ -82,20 +90,57 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
             if (SystemMgr.Unit._StopMoveCoroutine != null)
                 SystemMgr.Unit.StopCoroutine(SystemMgr.Unit._StopMoveCoroutine);
 
-            Debug.Log("MoveState Start");
+            _changeStateTimer = 0.25f;
+            _isStartStateTimer = false;
+            //Debug.Log("MoveState Start");
         }
 
         public override void Update()
         {
             SystemMgr.Unit.Progress();
             SystemMgr.Unit.Move(Input.GetAxisRaw("Horizontal"));
+            SystemMgr.Unit.CheckMovementDir();
+            
 
-            if(Input.GetAxisRaw("Horizontal") == 0)
-                SystemMgr.ChangeState(CustomFSMState.Idle);
             if (Input.GetKeyDown(KeyCode.C))
                 SystemMgr.ChangeState(CustomFSMState.Jump);
-            //if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
-            //    SystemMgr.ChangeState(CustomFSMState.Idle);
+            if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+            {
+                _isStartStateTimer = true;
+            }
+
+            if (_isStartStateTimer) // 키보드를 좌우 연타 했을 때 idle로 넘어가는 시간에 대한 유예 값.
+            {
+                _changeStateTimer -= Time.deltaTime;
+
+                if (_changeStateTimer >= 0.001f)
+                {
+                    if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+                    {
+                        _changeStateTimer = 0.25f;
+                        _isStartStateTimer = false;
+                        return;
+                    }
+                }
+                else
+                    SystemMgr.ChangeState(CustomFSMState.Idle);
+            }
+        }
+
+        private bool StateChangeCheck() // idle <-> Move 간 딜레이없는 빠른 교체를 막기 위한 함수
+        {
+            if (_changeStateTimer >= 0.01f)
+            {
+                if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    _changeStateTimer = 0.15f;
+                    return true;
+                }
+            }
+            else
+                return false;
+
+            return true;
         }
     }
 
@@ -121,14 +166,14 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
     private class JumpState : CustomFSMStateBase
     {
         float _addJumpPower = 1.5f;
-        float _jumpTimeCounter = 0.0f;
+        float _jumpTimeCounter = 0.1f;
         public JumpState(CustomFSMSystem system) : base(system)
         {
         }
 
         public override void EndState()
         {
-            Debug.Log("JumpState End");
+            //Debug.Log("JumpState End");
         }
 
         public override void StartState()
@@ -136,9 +181,9 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
             if (SystemMgr.Unit.IsGround)
             {
                 _addJumpPower = 0.2f;
-                _jumpTimeCounter = 0.35f;
+                _jumpTimeCounter = 0.1f;
                 SystemMgr.Unit.Jump(_addJumpPower);
-                Debug.Log("JumpState Start");
+                //Debug.Log("JumpState Start");
             }
             else
             {

@@ -6,8 +6,12 @@ public enum AniState
 {
     Idle = 0,
     Move,
-    Attack,
     Jump,
+    Attack,
+    Dash,
+    Hit,
+    Fall,
+    Contact
 }
 
 public class AnimationCtrl : MonoBehaviour
@@ -21,8 +25,8 @@ public class AnimationCtrl : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
     }
 
-    public void PlayAni(AniState aniState)
+    public void PlayAni(CustomFSMState aniState)
     {
-
+        Animator.SetInteger("State", (int)aniState);
     }
 }

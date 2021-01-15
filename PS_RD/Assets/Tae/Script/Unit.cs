@@ -16,6 +16,9 @@ public class Unit : UnitBase
     float _acceleration = 0;
     float _deceleration = 0;
     Vector2 _velocity;
+    float _facingDir = 1;
+    float _inputDir = 1;
+    bool _isFacingRight = true;
 
     // 상태 판단
     private bool _isGround = true;
@@ -58,6 +61,8 @@ public class Unit : UnitBase
 
     public override void Move(float deltaX)
     {
+        _inputDir = deltaX;
+
         if (deltaX != 0)
             _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, _speed * deltaX, _acceleration * Time.deltaTime), _rigid2D.velocity.y);
         else
@@ -72,6 +77,27 @@ public class Unit : UnitBase
         _deceleration = _isGround ? _groundDeceleration : 0;
 
         _rigid2D.velocity = new Vector2(_velocity.x, _rigid2D.velocity.y);
+
+        AniCtrl.PlayAni(FsmSystem.CurrState);
+    }
+
+    public void CheckMovementDir()
+    {
+        if (_isFacingRight && _inputDir < 0)
+        {
+            Flip();
+        }
+        else if (!_isFacingRight && _inputDir > 0)
+        {
+            Flip();
+        }
+    }
+
+    void Flip()
+    {
+        _facingDir *= -1;
+        _isFacingRight = !_isFacingRight;
+        transform.Rotate(0.0f, 180.0f, 0.0f);   // y값 돌리는 숫자를 curANi 머 선형보간 등 애니메이션을 주면 빙글도는 이쁜 애니메이션~
     }
 
     void CheckGround()
@@ -107,6 +133,5 @@ public class Unit : UnitBase
             yield return null;
         }
         _isStopMoveCoroutineRunning = false;
-        Debug.Log("End Corutin");
     }
 }
