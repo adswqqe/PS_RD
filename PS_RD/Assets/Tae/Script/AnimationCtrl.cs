@@ -11,7 +11,10 @@ public enum AniState
     Dash,
     Hit,
     Fall,
-    Contact
+    Contact,
+    DoubleJump,
+    Attack2,
+    Attack3,
 }
 
 public class AnimationCtrl : MonoBehaviour
@@ -25,7 +28,7 @@ public class AnimationCtrl : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
     }
 
-    public void PlayAni(CustomFSMState aniState)
+    public void PlayAni(AniState aniState)
     {
         Animator.SetInteger("State", (int)aniState);
     }

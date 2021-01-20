@@ -24,6 +24,8 @@ public class Unit : UnitBase
     private bool _isGround = true;
     public bool IsGround => _isGround;
 
+    public AniState CurAniState;
+
     // Compoenent
     Rigidbody2D _rigid2D;
     public Transform groundCheck;    // Ground체크를 위함
@@ -78,7 +80,7 @@ public class Unit : UnitBase
 
         _rigid2D.velocity = new Vector2(_velocity.x, _rigid2D.velocity.y);
 
-        AniCtrl.PlayAni(FsmSystem.CurrState);
+        AniCtrl.PlayAni(CurAniState);
     }
 
     public void CheckMovementDir()
@@ -118,7 +120,6 @@ public class Unit : UnitBase
             StopCoroutine(_StopMoveCoroutine);
 
         _StopMoveCoroutine = StartCoroutine(StopMoveCoroutine());
-
     }
     
     public Coroutine _StopMoveCoroutine;
