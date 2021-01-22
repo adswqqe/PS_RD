@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum CustomFSMState
 {
@@ -37,8 +38,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
     private Unit _unit = null;
     public Unit Unit => _unit;
 
-    [SerializeField, ReadOnly]
-    private bool _isAttackCancleAble = false;
+    public event UnityAction OnAttackEndAniEvent = null;
 
     private class IdleState : CustomFSMStateBase
     {
@@ -75,6 +75,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
                 SystemMgr.ChangeState(CustomFSMState.Jump);
             else if (Input.GetKeyDown(KeyCode.X))
                 SystemMgr.ChangeState(CustomFSMState.Attack);
+            else if (Input.GetKeyDown(KeyCode.Space))
+                SystemMgr.ChangeState(CustomFSMState.Dash);
         }
     }
 
@@ -112,7 +114,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
                 SystemMgr.ChangeState(CustomFSMState.Jump);
             else if (Input.GetKeyDown(KeyCode.X))
                 SystemMgr.ChangeState(CustomFSMState.Attack);
-
+            else if (Input.GetKeyDown(KeyCode.Space))
+                SystemMgr.ChangeState(CustomFSMState.Dash);
 
             if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
             {
@@ -157,23 +160,31 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
     private class AttackState : CustomFSMStateBase
     {
         int _attackIndex = 0;
+        int _nextAttackIndex = 0;
+        int _attackMaxIndex = 2;
+        float _attackInputTime = 0.0f;
+        float _attackBeInputTime = 0.0f;
+        float _attackTime = 0.2f;
+        AniState[] _attackAniIndex = new AniState[] { AniState.Attack, AniState.Attack2, AniState.Attack3 };
 
         public AttackState(CustomFSMSystem system) : base(system)
         {
+            system.OnAttackEndAniEvent += EndOrNextCheck;
         }
 
         public override void EndState()
         {
             _attackIndex = 0;
+            _nextAttackIndex = 0;
+            _attackInputTime = 0;
+            _attackBeInputTime = 0;
         }
 
         public override void StartState()
         {
-            Debug.Log("Attack State : " + _attackIndex);
-            SystemMgr._isAttackCancleAble = false;
+            _attackBeInputTime = Time.time;
             SystemMgr.Unit.CurAniState = AniState.Attack;
             SystemMgr._unit.Attack();
-            _attackIndex++;
         }
 
         public override void Update()
@@ -182,23 +193,44 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
             if (Input.GetKeyDown(KeyCode.X))
             {
-                if(SystemMgr._isAttackCancleAble)
+                _attackInputTime = Time.time;
+
+                if(_attackInputTime - _attackBeInputTime <= _attackTime)
                 {
-                    if (_attackIndex == 1)
-                    {
-                        SystemMgr.Unit.CurAniState = AniState.Attack2;
-                        _attackIndex++;
-
-                    }
-                    else if (_attackIndex == 2)
-                    {
-                        SystemMgr.Unit.CurAniState = AniState.Attack3;
-                        _attackIndex++;
-                    }
-
-                    SystemMgr._isAttackCancleAble = false;
-
+                    // 1타 > 2타 > 3타. 현재 애니메이션은 끊기면 안됨.
+                    _nextAttackIndex = _attackIndex + 1;
                 }
+
+                _attackBeInputTime = Time.time;
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
+                SystemMgr.ChangeState(CustomFSMState.Dash);
+        }
+
+        private void EndOrNextCheck()
+        {
+            if (_attackIndex != _nextAttackIndex)
+            {
+                if (_nextAttackIndex > _attackMaxIndex)
+                {
+                    _attackIndex = 0;
+                    _nextAttackIndex = 0;
+                }
+                else
+                {
+                    _attackIndex = _nextAttackIndex;
+                }
+
+                Debug.Log("호출");
+                Debug.Log("_nextAttackIndex : " + _nextAttackIndex);
+                Debug.Log("_attackIndex : " + _attackIndex);
+
+                SystemMgr.Unit.CurAniState = _attackAniIndex[_attackIndex];
+            }
+            else
+            {
+                Debug.Log("Idle");
+                SystemMgr.ChangeState(CustomFSMState.Idle);
             }
         }
     }
@@ -244,6 +276,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
             SystemMgr.Unit.Progress();
             SystemMgr.Unit.Move(Input.GetAxisRaw("Horizontal"));
 
+
             if (_jumpCount >= 1 && Input.GetKeyDown(KeyCode.C))
             {
                 DoubleJump();
@@ -278,12 +311,38 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         }
     }
 
+    private class DashState : CustomFSMStateBase
+    {
+        public DashState(CustomFSMSystem system) : base(system)
+        {
+        }
+
+        public override void EndState()
+        {
+        }
+
+        public override void StartState()
+        {
+            SystemMgr.Unit.CurAniState = AniState.Dash;
+            SystemMgr.Unit.Dash();
+        }
+
+        public override void Update()
+        {
+            SystemMgr.Unit.Progress();
+
+            if (Input.GetKeyDown(KeyCode.Z))
+                SystemMgr.ChangeState(CustomFSMState.Idle);
+        }
+    }
+
     protected override void RegisterState()
     {
         AddState(CustomFSMState.Idle, new IdleState(this));
         AddState(CustomFSMState.Move, new MoveState(this));
         AddState(CustomFSMState.Jump, new JumpState(this));
         AddState(CustomFSMState.Attack, new AttackState(this));
+        AddState(CustomFSMState.Dash, new DashState(this));
     }
 
     public void SetUnit(Unit unit)
@@ -296,12 +355,11 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
     public void EndAttack()
     {
-        ChangeState(CustomFSMState.Idle);
+        OnAttackEndAniEvent?.Invoke();
     }
 
     public void AttackCancleAble()
     {
-        Debug.Log("asdasd");
-        _isAttackCancleAble = true;
+
     }
 }

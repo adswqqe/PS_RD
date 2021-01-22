@@ -55,6 +55,11 @@ public class Unit : UnitBase
         
     }
 
+    public override void Dash()
+    {
+        _rigid2D.velocity = new Vector2(_velocity.x + 10, _velocity.y) * Time.timeScale;
+    }
+
     public override void Jump(float height)
     {
         _isGround = false;
