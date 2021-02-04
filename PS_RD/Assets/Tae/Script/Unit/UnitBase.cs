@@ -37,4 +37,6 @@ public abstract class UnitBase : MonoBehaviour
     public abstract void Jump(float height);
 
     public abstract void Dash();
+
+    public abstract void JumpAttack();
 }

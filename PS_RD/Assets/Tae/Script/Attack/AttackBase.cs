@@ -1,0 +1,63 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+//https://kupaprogramming.tistory.com/30 나중에 이걸로 에디터 수정하자.
+// https://blog.naver.com/2983934/221428284978
+public abstract class AttackBase : MonoBehaviour
+{
+    [Header ("Attack Option")]
+    [SerializeField, Tooltip("크리티컬이 발생하는가?")]
+    protected bool _isAbleCritical;
+
+    [SerializeField, Tooltip("플래쉬 효과가 발생하는가?")]
+    protected bool _isAbleFlash;
+
+    [SerializeField, Tooltip("히트 스탑이 발생하는가?")]
+    protected bool _isAbleHitStop;
+
+    [SerializeField, Tooltip("불릿 타임이 발생하는가?")]
+    protected bool _isAbleBulltTime;
+
+    [SerializeField, Tooltip("이펙트가 표시되는가?")]
+    protected bool _isDisplyFx;
+
+    [Header ("Values")]
+    [SerializeField]
+    protected float _hitStopTime;
+    [SerializeField]
+    protected float _bulltTime;
+    [SerializeField]
+    protected float _shakeTime;
+    [SerializeField]
+    protected float _flashTime;
+    [SerializeField]
+    protected float _criticalPercentage;
+    [SerializeField]
+    protected LayerMask _hitLayerMask;
+
+    protected float _minAttackDamage;
+    protected float _maxAttackDamage;
+
+    [Header("Objects")]
+    [SerializeField]
+    protected GameObject _fxGO;
+    [SerializeField]
+    protected FlashCtrl _flashGO;
+
+
+
+    public abstract void Flash();
+
+    public abstract void HitStop();
+
+    public abstract void BulltTime();
+
+    public abstract void PlayFx();
+
+    public abstract void PlaySfx();
+
+    public abstract void AttackDamage();
+
+    public abstract void SetDamage(float min, float max);
+}
+
