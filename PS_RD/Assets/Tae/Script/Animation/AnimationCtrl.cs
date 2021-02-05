@@ -15,6 +15,7 @@ public enum AniState
     DoubleJump,
     Attack2,
     Attack3,
+    JumpAttack,
 }
 
 public class AnimationCtrl : MonoBehaviour

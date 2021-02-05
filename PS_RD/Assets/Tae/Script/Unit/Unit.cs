@@ -20,6 +20,16 @@ public class Unit : UnitBase
     float _inputDir = 1;
     bool _isFacingRight = true;
 
+    // 점프 관련 변수
+    private float _coyoteTime = 0.2f;
+    public float CoyoteTime => _coyoteTime;
+
+    // 공격 관련 변수
+    [HideInInspector]
+    public int curAttackIndex = 0;
+    public BasicAttack[] basicAttacks;
+    public BasicAttack basicJumpAttack;
+
     // 상태 판단
     private bool _isGround = true;
     public bool IsGround => _isGround;
@@ -35,24 +45,26 @@ public class Unit : UnitBase
 
     private void Start()
     {
-        _rigid2D = GetComponent<Rigidbody2D>();
         Init();
     }
 
-    private void Init()
+    protected void Init()
     {
-        FsmSystem.SetUnit(this);
+        //FsmSystem.SetUnit(this);
         _velocity = Vector2.zero;
+        _rigid2D = GetComponent<Rigidbody2D>();
     }
 
     public override void Attack()
     {
+        _speed = 2;
 
+        basicAttacks[curAttackIndex].gameObject.SetActive(true);
     }
 
     public override void Idle()
     {
-        
+        _speed = 10;
     }
 
     public override void Dash()
@@ -64,6 +76,11 @@ public class Unit : UnitBase
     {
         _isGround = false;
         _rigid2D.velocity = new Vector2(_velocity.x, Mathf.Sqrt(-Physics2D.gravity.y * 2 * (height))) * Time.timeScale;
+    }
+
+    public override void JumpAttack()
+    {
+        basicJumpAttack.gameObject.SetActive(true);
     }
 
     public override void Move(float deltaX)
@@ -111,6 +128,15 @@ public class Unit : UnitBase
     {
         bool lastIsGround = _isGround;
         _isGround = Physics2D.OverlapBox(groundCheck.position, groundCheckBoxSize, 0, groundLayer);
+
+        if(_isGround == false)
+        {
+            _coyoteTime -= Time.deltaTime;
+        }
+        else if (_isGround == true)
+        {
+            _coyoteTime = 0.2f;
+        }
     }
 
     private void OnDrawGizmos()

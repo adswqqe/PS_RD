@@ -14,6 +14,7 @@ public enum CustomFSMState
     Fall,
     Contact,
     DoubleJump,
+    JumpAttack,
 }
 
 public abstract class CustomFSMStateBase : IFSMStateBase
@@ -36,9 +37,15 @@ public abstract class CustomFSMStateBase : IFSMStateBase
 public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 {
     private Unit _unit = null;
+
     public Unit Unit => _unit;
 
     public event UnityAction OnAttackEndAniEvent = null;
+
+    private void Start()
+    {
+        SetUnit(GetComponentInParent<Unit>());
+    }
 
     private class IdleState : CustomFSMStateBase
     {
@@ -164,7 +171,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         int _attackMaxIndex = 2;
         float _attackInputTime = 0.0f;
         float _attackBeInputTime = 0.0f;
-        float _attackTime = 0.2f;
+        float _attackTime = 0.5f;
         AniState[] _attackAniIndex = new AniState[] { AniState.Attack, AniState.Attack2, AniState.Attack3 };
 
         public AttackState(CustomFSMSystem system) : base(system)
@@ -175,6 +182,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         public override void EndState()
         {
             _attackIndex = 0;
+            SystemMgr.Unit.curAttackIndex = _attackIndex;
             _nextAttackIndex = 0;
             _attackInputTime = 0;
             _attackBeInputTime = 0;
@@ -182,14 +190,15 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
         public override void StartState()
         {
+            SystemMgr.Unit.StopMove();
             _attackBeInputTime = Time.time;
             SystemMgr.Unit.CurAniState = AniState.Attack;
-            SystemMgr._unit.Attack();
         }
 
         public override void Update()
         {
             SystemMgr.Unit.Progress();
+            SystemMgr.Unit.Move(Input.GetAxisRaw("Horizontal"));
 
             if (Input.GetKeyDown(KeyCode.X))
             {
@@ -221,10 +230,9 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
                     _attackIndex = _nextAttackIndex;
                 }
 
-                Debug.Log("호출");
                 Debug.Log("_nextAttackIndex : " + _nextAttackIndex);
                 Debug.Log("_attackIndex : " + _attackIndex);
-
+                SystemMgr.Unit.curAttackIndex = _attackIndex;
                 SystemMgr.Unit.CurAniState = _attackAniIndex[_attackIndex];
             }
             else
@@ -234,6 +242,38 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
             }
         }
     }
+
+    private class JumpAttackState : CustomFSMStateBase
+    {
+        public JumpAttackState(CustomFSMSystem system) : base(system)
+        {
+        }
+
+        public override void EndState()
+        {
+        }
+
+        public override void StartState()
+        {
+            SystemMgr.Unit.CurAniState = AniState.JumpAttack;
+            SystemMgr.Unit.JumpAttack();
+        }
+
+        public override void Update()
+        {
+            SystemMgr.Unit.Progress();
+            SystemMgr.Unit.Move(Input.GetAxisRaw("Horizontal"));
+
+            if (SystemMgr.Unit.IsGround)
+            {
+                if (Input.GetAxisRaw("Horizontal") == 0)
+                    SystemMgr.ChangeState(CustomFSMState.Idle);
+                else if (Input.GetAxisRaw("Horizontal") != 0)
+                    SystemMgr.ChangeState(CustomFSMState.Move);
+            }
+        }
+    }
+
 
     private class JumpState : CustomFSMStateBase
     {
@@ -254,7 +294,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         {
             _jumpCount = 1;
 
-            if (SystemMgr.Unit.IsGround)
+            if (SystemMgr.Unit.CoyoteTime >= 0.0f)
             {
                 _addJumpPower = 0.2f;
                 _jumpTimeCounter = 0.1f;
@@ -292,6 +332,10 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
             if (Input.GetKeyUp(KeyCode.C))
             {
                 _jumpTimeCounter = 0;
+            }
+            else if (Input.GetKeyDown(KeyCode.X))
+            {
+                SystemMgr.ChangeState(CustomFSMState.JumpAttack);
             }
 
             if (SystemMgr.Unit.IsGround)
@@ -336,6 +380,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         }
     }
 
+
     protected override void RegisterState()
     {
         AddState(CustomFSMState.Idle, new IdleState(this));
@@ -343,14 +388,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         AddState(CustomFSMState.Jump, new JumpState(this));
         AddState(CustomFSMState.Attack, new AttackState(this));
         AddState(CustomFSMState.Dash, new DashState(this));
-    }
-
-    public void SetUnit(Unit unit)
-    {
-        if (unit == null)
-            return;
-
-        _unit = unit;
+        AddState(CustomFSMState.JumpAttack, new JumpAttackState(this));
     }
 
     public void EndAttack()
@@ -361,5 +399,12 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
     public void AttackCancleAble()
     {
 
+    }
+    public void SetUnit(Unit unit)
+    {
+        if (unit == null)
+            return;
+
+        _unit = unit;
     }
 }

@@ -7,9 +7,6 @@ public abstract class UnitBase : MonoBehaviour
     private AnimationCtrl _aniCtrl;
     public AnimationCtrl AniCtrl => _aniCtrl;
 
-    private CustomFSMSystem _fsmSystem;
-    public CustomFSMSystem FsmSystem => _fsmSystem;
-
     public abstract void Progress();
 
     private bool _isInit = false;
@@ -23,7 +20,6 @@ public abstract class UnitBase : MonoBehaviour
     private void InitUnit()
     {
         _aniCtrl = GetComponentInChildren<AnimationCtrl>();
-        _fsmSystem = GetComponentInChildren<CustomFSMSystem>();
 
         _isInit = true;
     }
@@ -37,4 +33,6 @@ public abstract class UnitBase : MonoBehaviour
     public abstract void Jump(float height);
 
     public abstract void Dash();
+
+    public abstract void JumpAttack();
 }
