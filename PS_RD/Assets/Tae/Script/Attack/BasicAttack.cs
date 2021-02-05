@@ -5,7 +5,7 @@ using UnityEngine;
 public class BasicAttack : AttackBase
 {
     BoxCollider2D boxCollider2D;
-
+    float damage = 0.0f;
     [SerializeField]
     bool _testAlwaysAttackTrue;
     private void OnEnable()
@@ -33,6 +33,11 @@ public class BasicAttack : AttackBase
 
     public override void AttackDamage()
     {
+        //크리티컬 확률 계산
+        float criticalRoulette = Random.Range(0, 100);
+        bool isCritical = (_criticalPercentage > criticalRoulette) ? true : false;
+
+
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(transform.position, boxCollider2D.size, 0.0f, _hitLayerMask);
 
         bool isEnter = false;
@@ -103,5 +108,7 @@ public class BasicAttack : AttackBase
     {
         _minAttackDamage = min;
         _maxAttackDamage = max;
+
+        damage = Random.Range(_minAttackDamage, _maxAttackDamage);
     }
 }
