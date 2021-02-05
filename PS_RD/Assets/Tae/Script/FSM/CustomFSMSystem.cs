@@ -37,9 +37,15 @@ public abstract class CustomFSMStateBase : IFSMStateBase
 public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 {
     private Unit _unit = null;
+
     public Unit Unit => _unit;
 
     public event UnityAction OnAttackEndAniEvent = null;
+
+    private void Start()
+    {
+        SetUnit(GetComponentInParent<Unit>());
+    }
 
     private class IdleState : CustomFSMStateBase
     {
@@ -385,14 +391,6 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         AddState(CustomFSMState.JumpAttack, new JumpAttackState(this));
     }
 
-    public void SetUnit(Unit unit)
-    {
-        if (unit == null)
-            return;
-
-        _unit = unit;
-    }
-
     public void EndAttack()
     {
         OnAttackEndAniEvent?.Invoke();
@@ -401,5 +399,12 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
     public void AttackCancleAble()
     {
 
+    }
+    public void SetUnit(Unit unit)
+    {
+        if (unit == null)
+            return;
+
+        _unit = unit;
     }
 }

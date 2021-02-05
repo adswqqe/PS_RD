@@ -45,14 +45,14 @@ public class Unit : UnitBase
 
     private void Start()
     {
-        _rigid2D = GetComponent<Rigidbody2D>();
         Init();
     }
 
-    private void Init()
+    protected void Init()
     {
-        FsmSystem.SetUnit(this);
+        //FsmSystem.SetUnit(this);
         _velocity = Vector2.zero;
+        _rigid2D = GetComponent<Rigidbody2D>();
     }
 
     public override void Attack()
