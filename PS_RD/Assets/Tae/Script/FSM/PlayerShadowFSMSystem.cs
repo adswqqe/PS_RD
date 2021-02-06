@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum PlayerShadowFSMState
+{
+    Idle,
+    OutOfControl,
+    ControlRecovery,
+    Destroy,
+    Resurrection,
+}
+
 public abstract class PlayerShadowFSMStateBase : IFSMStateBase
 {
     private PlayerShadowFSMSystem _systemMgr = null;
@@ -20,7 +29,7 @@ public abstract class PlayerShadowFSMStateBase : IFSMStateBase
     public abstract void EndState();
 }
 
-public class PlayerShadowFSMSystem : FSMSystem<CustomFSMState, PlayerShadowFSMStateBase>
+public class PlayerShadowFSMSystem : FSMSystem<PlayerShadowFSMState, PlayerShadowFSMStateBase>
 {
     private PlayerShadowUnit _unit = null;
     public PlayerShadowUnit Unit => _unit;
@@ -55,10 +64,89 @@ public class PlayerShadowFSMSystem : FSMSystem<CustomFSMState, PlayerShadowFSMSt
         }
     }
 
+    private class OutOfControlState : PlayerShadowFSMStateBase
+    {
+        public OutOfControlState(PlayerShadowFSMSystem system) : base(system)
+        {
+        }
+
+        public override void EndState()
+        {
+        }
+
+        public override void StartState()
+        {
+        }
+
+        public override void Update()
+        {
+        }
+    }
+
+    private class ControlRecoveryState : PlayerShadowFSMStateBase
+    {
+        public ControlRecoveryState(PlayerShadowFSMSystem system) : base(system)
+        {
+        }
+
+        public override void EndState()
+        {
+        }
+
+        public override void StartState()
+        {
+        }
+
+        public override void Update()
+        {
+        }
+    }
+
+    private class DestroyState : PlayerShadowFSMStateBase
+    {
+        public DestroyState(PlayerShadowFSMSystem system) : base(system)
+        {
+        }
+
+        public override void EndState()
+        {
+        }
+
+        public override void StartState()
+        {
+        }
+
+        public override void Update()
+        {
+        }
+    }
+
+    private class ResurrectionState : PlayerShadowFSMStateBase
+    {
+        public ResurrectionState(PlayerShadowFSMSystem system) : base(system)
+        {
+        }
+
+        public override void EndState()
+        {
+        }
+
+        public override void StartState()
+        {
+        }
+
+        public override void Update()
+        {
+        }
+    }
 
     protected override void RegisterState()
     {
-        AddState(CustomFSMState.Idle, new IdleState(this));
+        AddState(PlayerShadowFSMState.Idle, new IdleState(this));
+        AddState(PlayerShadowFSMState.OutOfControl, new OutOfControlState(this));
+        AddState(PlayerShadowFSMState.ControlRecovery, new ControlRecoveryState(this));
+        AddState(PlayerShadowFSMState.Destroy, new DestroyState(this));
+        AddState(PlayerShadowFSMState.Resurrection, new ResurrectionState(this));
     }
 
     public void SetUnit(PlayerShadowUnit unit)
