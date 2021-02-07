@@ -22,8 +22,6 @@ public abstract class UnitBase : MonoBehaviour
         _aniCtrl = GetComponentInChildren<AnimationCtrl>();
 
         _isInit = true;
-
-
     }
 
     public abstract void Idle();

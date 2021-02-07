@@ -77,6 +77,8 @@ public class PlayerShadowFSMSystem : FSMSystem<PlayerShadowFSMState, PlayerShado
 
         public override void StartState()
         {
+            SystemMgr.Unit.shadowAniState = ShadowAniState.OutOfControl;
+            SystemMgr.Unit.OutOfControl();
         }
 
         public override void Update()
@@ -96,6 +98,8 @@ public class PlayerShadowFSMSystem : FSMSystem<PlayerShadowFSMState, PlayerShado
 
         public override void StartState()
         {
+            SystemMgr.Unit.shadowAniState = ShadowAniState.ControlRecovery;
+            SystemMgr.Unit.ControlRecovery();
         }
 
         public override void Update()

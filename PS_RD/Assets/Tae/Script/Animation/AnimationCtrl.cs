@@ -18,6 +18,14 @@ public enum AniState
     JumpAttack,
 }
 
+public enum ShadowAniState // 50~
+{
+    OutOfControl = 50,
+    ControlRecovery,
+    Destroy,
+    Resurrection,
+}
+
 public class AnimationCtrl : MonoBehaviour
 {
     Animator _animator = null;
@@ -30,6 +38,11 @@ public class AnimationCtrl : MonoBehaviour
     }
 
     public void PlayAni(AniState aniState)
+    {
+        Animator.SetInteger("State", (int)aniState);
+    }
+
+    public void PlayAni(ShadowAniState aniState)
     {
         Animator.SetInteger("State", (int)aniState);
     }
