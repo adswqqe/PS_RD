@@ -39,6 +39,7 @@ public class PlayerShadowFSMSystem : FSMSystem<PlayerShadowFSMState, PlayerShado
     private void Start()
     {
         SetUnit(GetComponentInParent<PlayerShadowUnit>());
+        Unit.OnLightDetectionAction += OnLightDetection;
     }
 
     private class IdleState : PlayerShadowFSMStateBase
@@ -165,5 +166,10 @@ public class PlayerShadowFSMSystem : FSMSystem<PlayerShadowFSMState, PlayerShado
     public void AttackCancleAble()
     {
 
+    }
+
+    private void OnLightDetection()
+    {
+        ChangeState(PlayerShadowFSMState.OutOfControl);
     }
 }

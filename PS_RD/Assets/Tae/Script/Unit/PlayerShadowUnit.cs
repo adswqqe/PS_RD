@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerShadowUnit : UnitBase
 {
     private Unit _playerUnit;
+
+    // Events
+    public event UnityAction OnLightDetectionAction;
 
     private void Start()
     {
@@ -47,5 +51,31 @@ public class PlayerShadowUnit : UnitBase
 
     }
 
-    
+    public void OutOfControl()
+    {
+
+    }
+
+    public void ControlRecovery()
+    {
+
+    }
+
+    public void DestroyState()
+    {
+
+    }
+
+    public void Resurrection()
+    {
+
+    }
+
+    public override void Hit()
+    {
+        // OnCollison으로 변경할 지 고민 해야함.
+        OnLightDetectionAction?.Invoke();
+    }
+
+
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
 
 public class Unit : UnitBase
@@ -42,6 +43,8 @@ public class Unit : UnitBase
     public Vector2 groundCheckBoxSize;
     public LayerMask groundLayer;
 
+    // Events
+    public event UnityAction OnDamageAction;
 
     private void Start()
     {
@@ -91,6 +94,11 @@ public class Unit : UnitBase
             _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, _speed * deltaX, _acceleration * Time.deltaTime), _rigid2D.velocity.y);
         else
             _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, 0, _deceleration * Time.deltaTime), _rigid2D.velocity.y);
+    }
+
+    public override void Hit()
+    {
+        OnDamageAction?.Invoke();
     }
 
     public override void Progress()

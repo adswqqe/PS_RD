@@ -45,6 +45,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
     private void Start()
     {
         SetUnit(GetComponentInParent<Unit>());
+        Unit.OnDamageAction += OnDamage;
     }
 
     private class IdleState : CustomFSMStateBase
@@ -97,6 +98,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         public override void EndState()
         {
             //Debug.Log("MoveState End");
+            //SystemMgr.Unit.StopMove();    // 나중에 hit <-> 이동 상태간 움직임 버그 있으면 여기 수정
         }
 
         public override void StartState()
@@ -380,6 +382,25 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         }
     }
 
+    private class HitState : CustomFSMStateBase
+    {
+        public HitState(CustomFSMSystem system) : base(system)
+        {
+        }
+
+        public override void EndState()
+        {
+        }
+
+        public override void StartState()
+        {
+        }
+
+        public override void Update()
+        {
+        }
+    }
+
 
     protected override void RegisterState()
     {
@@ -389,6 +410,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         AddState(CustomFSMState.Attack, new AttackState(this));
         AddState(CustomFSMState.Dash, new DashState(this));
         AddState(CustomFSMState.JumpAttack, new JumpAttackState(this));
+        AddState(CustomFSMState.Hit, new HitState(this));
     }
 
     public void EndAttack()
@@ -400,11 +422,17 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
     {
 
     }
+
     public void SetUnit(Unit unit)
     {
         if (unit == null)
             return;
 
         _unit = unit;
+    }
+
+    private void OnDamage()
+    {
+        ChangeState(CustomFSMState.Hit);
     }
 }
