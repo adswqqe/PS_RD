@@ -39,6 +39,7 @@ public class AnimationCtrl : MonoBehaviour
 
     public void PlayAni(AniState aniState)
     {
+        Animator.speed = TimeManager.GetTimeScale;
         Animator.SetInteger("State", (int)aniState);
     }
 

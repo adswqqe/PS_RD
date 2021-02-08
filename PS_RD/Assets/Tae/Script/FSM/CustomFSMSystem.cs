@@ -347,6 +347,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
                 else if (Input.GetAxisRaw("Horizontal") != 0)
                     SystemMgr.ChangeState(CustomFSMState.Move);
             }
+
+            //SystemMgr.Unit.AddJumpGravity();
         }
 
         private void DoubleJump()

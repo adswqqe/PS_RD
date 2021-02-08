@@ -72,13 +72,18 @@ public class Unit : UnitBase
 
     public override void Dash()
     {
-        _rigid2D.velocity = new Vector2(_velocity.x + 10, _velocity.y) * Time.timeScale;
+        _rigid2D.velocity = new Vector2(_velocity.x + 10, _velocity.y) * TimeManager.GetTimeScale;
     }
 
     public override void Jump(float height)
     {
         _isGround = false;
-        _rigid2D.velocity = new Vector2(_velocity.x, Mathf.Sqrt(-Physics2D.gravity.y * 2 * (height))) * Time.timeScale;
+        _velocity = new Vector2(_velocity.x, Mathf.Sqrt(-Physics2D.gravity.y * 2 * (height)));// * TimeManager.GetTimeScale;
+    }
+
+    public void AddJumpGravity()
+    {
+        _velocity = new Vector2(_velocity.x, _velocity.y - 0.02f);
     }
 
     public override void JumpAttack()
@@ -91,9 +96,9 @@ public class Unit : UnitBase
         _inputDir = deltaX;
 
         if (deltaX != 0)
-            _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, _speed * deltaX, _acceleration * Time.deltaTime), _rigid2D.velocity.y);
+            _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, _speed * deltaX, _acceleration * TimeManager.deltaTime), _rigid2D.velocity.y);
         else
-            _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, 0, _deceleration * Time.deltaTime), _rigid2D.velocity.y);
+            _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, 0, _deceleration * TimeManager.deltaTime), _rigid2D.velocity.y);
     }
 
     public override void Hit()
@@ -107,8 +112,9 @@ public class Unit : UnitBase
 
         _acceleration = _isGround ? _walkAcceleration : _airAcceleration;
         _deceleration = _isGround ? _groundDeceleration : 0;
-
-        _rigid2D.velocity = new Vector2(_velocity.x, _rigid2D.velocity.y);
+        if (TimeManager.isTest)
+            Debug.Log(_velocity.y);
+        _rigid2D.velocity = new Vector2(_velocity.x, _velocity.y) * Time.deltaTime * TimeManager.GetTimeScale;
 
         AniCtrl.PlayAni(CurAniState);
     }
@@ -169,7 +175,7 @@ public class Unit : UnitBase
         _isStopMoveCoroutineRunning = true;
         while (Mathf.Abs(_velocity.x) >= 0.01f)
         {
-            _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, 0, _deceleration * Time.deltaTime), _rigid2D.velocity.y);
+            _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, 0, _deceleration * TimeManager.deltaTime), _rigid2D.velocity.y);
             yield return null;
         }
         _isStopMoveCoroutineRunning = false;
