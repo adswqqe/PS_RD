@@ -42,9 +42,14 @@ public class Unit : UnitBase
     public Transform groundCheck;    // Ground체크를 위함
     public Vector2 groundCheckBoxSize;
     public LayerMask groundLayer;
+    public PlayerShadowUnit playerShadowUnit;
 
     // Events
     public event UnityAction OnDamageAction;
+    public event UnityAction OnSkill1TransformAniEvent;
+
+    // Prefabs
+    public GameObject skill1GO;
 
     private void Start()
     {
@@ -61,7 +66,7 @@ public class Unit : UnitBase
     public override void Attack()
     {
         _speed = 2;
-
+        basicAttacks[curAttackIndex].SetDamage(0, 10);
         basicAttacks[curAttackIndex].gameObject.SetActive(true);
     }
 
@@ -72,13 +77,13 @@ public class Unit : UnitBase
 
     public override void Dash()
     {
-        _rigid2D.velocity = new Vector2(_velocity.x + 10, _velocity.y) * TimeManager.GetTimeScale;
+        _rigid2D.velocity = new Vector2(_velocity.x + 10, _velocity.y) * Time.timeScale;
     }
 
     public override void Jump(float height)
     {
         _isGround = false;
-        _rigid2D.velocity = new Vector2(_velocity.x, Mathf.Sqrt(-Physics2D.gravity.y * 2 * (height))) * TimeManager.GetTimeScale;
+        _rigid2D.velocity = new Vector2(_velocity.x, Mathf.Sqrt(-Physics2D.gravity.y * 2 * (height))) * Time.timeScale;
     }
 
     public void AddJumpGravity()
@@ -96,14 +101,26 @@ public class Unit : UnitBase
         _inputDir = deltaX;
 
         if (deltaX != 0)
-            _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, _speed * deltaX, _acceleration * TimeManager.deltaTime), _rigid2D.velocity.y);
+            _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, _speed * deltaX, _acceleration * Time.deltaTime), _rigid2D.velocity.y);
         else
-            _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, 0, _deceleration * TimeManager.deltaTime), _rigid2D.velocity.y);
+            _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, 0, _deceleration * Time.deltaTime), _rigid2D.velocity.y);
     }
 
     public override void Hit()
     {
         OnDamageAction?.Invoke();
+    }
+
+    public void Skill1()
+    {
+        playerShadowUnit.Skill1();
+        var temp = Instantiate(skill1GO, new Vector3(transform.position.x + (0.5f * _facingDir), transform.position.y, transform.position.z), Quaternion.identity);
+        temp.GetComponent<Skill1Ctrl>().Init(transform, _facingDir, playerShadowUnit);
+    }
+
+    public void Skill1AniEvent()
+    {
+        OnSkill1TransformAniEvent?.Invoke();
     }
 
     public override void Progress()
@@ -114,7 +131,7 @@ public class Unit : UnitBase
         _deceleration = _isGround ? _groundDeceleration : 0;
         if (TimeManager.isTest)
             Debug.Log(_velocity.y);
-        _rigid2D.velocity = new Vector2(_velocity.x, _velocity.y);
+        _rigid2D.velocity = new Vector2(_velocity.x, _rigid2D.velocity.y);
 
         AniCtrl.PlayAni(CurAniState);
     }

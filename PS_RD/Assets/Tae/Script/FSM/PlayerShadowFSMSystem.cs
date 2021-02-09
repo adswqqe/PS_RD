@@ -40,6 +40,8 @@ public class PlayerShadowFSMSystem : FSMSystem<PlayerShadowFSMState, PlayerShado
     {
         SetUnit(GetComponentInParent<PlayerShadowUnit>());
         Unit.OnLightDetectionAction += OnLightDetection;
+        Unit.OnResurrectionAction += OnResurrection;
+        Unit.OnIdleAction += OnIdle;
     }
 
     private class IdleState : PlayerShadowFSMStateBase
@@ -138,10 +140,13 @@ public class PlayerShadowFSMSystem : FSMSystem<PlayerShadowFSMState, PlayerShado
 
         public override void StartState()
         {
+            SystemMgr.Unit.shadowAniState = ShadowAniState.Resurrection;
         }
 
         public override void Update()
         {
+            SystemMgr.Unit.Resurrection();
+            SystemMgr.Unit.Progress();
         }
     }
 
@@ -176,4 +181,15 @@ public class PlayerShadowFSMSystem : FSMSystem<PlayerShadowFSMState, PlayerShado
     {
         ChangeState(PlayerShadowFSMState.OutOfControl);
     }
+
+    private void OnResurrection()
+    {
+        ChangeState(PlayerShadowFSMState.Resurrection);
+    }
+
+    private void OnIdle()
+    {
+        ChangeState(PlayerShadowFSMState.Idle);
+    }
+
 }

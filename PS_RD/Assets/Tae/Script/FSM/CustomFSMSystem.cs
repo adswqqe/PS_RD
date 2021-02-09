@@ -15,6 +15,7 @@ public enum CustomFSMState
     Contact,
     DoubleJump,
     JumpAttack,
+    Skill1,
 }
 
 public abstract class CustomFSMStateBase : IFSMStateBase
@@ -46,6 +47,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
     {
         SetUnit(GetComponentInParent<Unit>());
         Unit.OnDamageAction += OnDamage;
+        Unit.OnSkill1TransformAniEvent += OnChangeIdle;
     }
 
     private class IdleState : CustomFSMStateBase
@@ -85,6 +87,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
                 SystemMgr.ChangeState(CustomFSMState.Attack);
             else if (Input.GetKeyDown(KeyCode.Space))
                 SystemMgr.ChangeState(CustomFSMState.Dash);
+            else if (Input.GetKeyDown(KeyCode.S))
+                SystemMgr.ChangeState(CustomFSMState.Skill1);
         }
     }
 
@@ -405,6 +409,34 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         }
     }
 
+    private class Skill1State : CustomFSMStateBase
+    {
+        public Skill1State(CustomFSMSystem system) : base(system)
+        {
+        }
+
+        public override void EndState()
+        {
+
+        }
+
+        public override void StartState()
+        {
+            if (SystemMgr.Unit.playerShadowUnit.isControlAble == false)
+                SystemMgr.ChangeState(CustomFSMState.Idle);
+            else
+            {
+                SystemMgr.Unit.Skill1();
+                SystemMgr.Unit.CurAniState = AniState.Skll1;
+            }
+        }
+
+        public override void Update()
+        {
+            SystemMgr.Unit.Progress();
+        }
+    }
+
 
     protected override void RegisterState()
     {
@@ -415,6 +447,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         AddState(CustomFSMState.Dash, new DashState(this));
         AddState(CustomFSMState.JumpAttack, new JumpAttackState(this));
         AddState(CustomFSMState.Hit, new HitState(this));
+        AddState(CustomFSMState.Skill1, new Skill1State(this));
+
     }
 
     public void EndAttack()
@@ -438,5 +472,10 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
     private void OnDamage()
     {
         ChangeState(CustomFSMState.Hit);
+    }
+
+    private void OnChangeIdle()
+    {
+        ChangeState(CustomFSMState.Idle);
     }
 }

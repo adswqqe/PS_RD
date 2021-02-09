@@ -16,6 +16,7 @@ public enum AniState
     Attack2,
     Attack3,
     JumpAttack,
+    Skll1,
 }
 
 public enum ShadowAniState // 50~
@@ -47,4 +48,5 @@ public class AnimationCtrl : MonoBehaviour
     {
         Animator.SetInteger("State", (int)aniState);
     }
+
 }

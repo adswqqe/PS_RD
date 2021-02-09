@@ -12,6 +12,8 @@ public class PlayerShadowUnit : UnitBase
 
     // Events
     public event UnityAction OnLightDetectionAction;
+    public event UnityAction OnResurrectionAction;
+    public event UnityAction OnIdleAction;
 
     public ShadowAniState shadowAniState;
 
@@ -37,6 +39,7 @@ public class PlayerShadowUnit : UnitBase
     public override void Idle()
     {
         AniCtrl.PlayAni(_playerUnit.CurAniState);
+        isControlAble = true;
     }
 
     public override void Dash()
@@ -59,30 +62,51 @@ public class PlayerShadowUnit : UnitBase
 
     }
 
+    public void Skill1()
+    {
+        OnLightDetectionAction?.Invoke();
+        isControlAble = false;
+    }
+
+    public void Skill1End()
+    {
+        OnResurrectionAction?.Invoke();
+        isControlAble = true;
+    }
+
     public void OutOfControl()
     {
         AniCtrl.PlayAni(shadowAniState);
+        isControlAble = false;
     }
 
     public void ControlRecovery()
     {
         AniCtrl.PlayAni(shadowAniState);
+        isControlAble = false;
     }
 
     public void DestroyState()
     {
         AniCtrl.PlayAni(shadowAniState);
+        isControlAble = false;
     }
 
     public void Resurrection()
     {
         AniCtrl.PlayAni(shadowAniState);
+        isControlAble = false;
     }
 
     public override void Hit()
     {
         // OnCollison으로 변경할 지 고민 해야함.
         OnLightDetectionAction?.Invoke();
+    }
+
+    public void ResurrectionAniEnd()
+    {
+        OnIdleAction?.Invoke();
     }
 
 

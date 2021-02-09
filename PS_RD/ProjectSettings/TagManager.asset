@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Shadow
+  - Skill
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Ground
   - Shadow
   - Player
-  - 
+  - Skill
   - 
   - 
   - 
