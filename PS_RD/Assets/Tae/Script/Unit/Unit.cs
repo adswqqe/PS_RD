@@ -78,7 +78,7 @@ public class Unit : UnitBase
     public override void Jump(float height)
     {
         _isGround = false;
-        _velocity = new Vector2(_velocity.x, Mathf.Sqrt(-Physics2D.gravity.y * 2 * (height)));// * TimeManager.GetTimeScale;
+        _rigid2D.velocity = new Vector2(_velocity.x, Mathf.Sqrt(-Physics2D.gravity.y * 2 * (height))) * TimeManager.GetTimeScale;
     }
 
     public void AddJumpGravity()
@@ -114,7 +114,7 @@ public class Unit : UnitBase
         _deceleration = _isGround ? _groundDeceleration : 0;
         if (TimeManager.isTest)
             Debug.Log(_velocity.y);
-        _rigid2D.velocity = new Vector2(_velocity.x, _velocity.y) * Time.deltaTime * TimeManager.GetTimeScale;
+        _rigid2D.velocity = new Vector2(_velocity.x, _velocity.y);
 
         AniCtrl.PlayAni(CurAniState);
     }

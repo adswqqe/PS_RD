@@ -112,6 +112,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
             //Debug.Log("MoveState Start");
         }
 
+        // 이걸 FSM에서 처리하는게 아니고 키입력을 관리하는 클래스를 만들어서 거기서 관리.
+        // 유닛 컨트롤러라는 매니저 클래스를 하나 만들어서 유닛을 등록해서 키에 따라 행동하도록.
         public override void Update()
         {
             SystemMgr.Unit.Progress();
@@ -298,9 +300,9 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
             if (SystemMgr.Unit.CoyoteTime >= 0.0f)
             {
-                _addJumpPower = 0.2f;
                 _jumpTimeCounter = 0.1f;
                 SystemMgr.Unit.Jump(_addJumpPower);
+                _addJumpPower = 0.2f;
                 SystemMgr.Unit.CurAniState = AniState.Jump;
                 //Debug.Log("JumpState Start");
             }
