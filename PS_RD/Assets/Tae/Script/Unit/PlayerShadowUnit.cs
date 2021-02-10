@@ -9,11 +9,13 @@ public class PlayerShadowUnit : UnitBase
 
     // Compoenent
     private BoxCollider2D boxCollider2D;
+    public SpriteRenderer _spriteRenderer;
 
     // Events
     public event UnityAction OnLightDetectionAction;
     public event UnityAction OnResurrectionAction;
     public event UnityAction OnIdleAction;
+    public event UnityAction OnSkill1StartStateAction;
 
     public ShadowAniState shadowAniState;
 
@@ -64,12 +66,19 @@ public class PlayerShadowUnit : UnitBase
 
     public void Skill1()
     {
-        OnLightDetectionAction?.Invoke();
+        OnSkill1StartStateAction?.Invoke();
+        AniCtrl.PlayAni(shadowAniState);
         isControlAble = false;
+    }
+
+    public void SKill1AniEnd()
+    {
+        _spriteRenderer.enabled = false;
     }
 
     public void Skill1End()
     {
+        _spriteRenderer.enabled = true;
         OnResurrectionAction?.Invoke();
         isControlAble = true;
     }

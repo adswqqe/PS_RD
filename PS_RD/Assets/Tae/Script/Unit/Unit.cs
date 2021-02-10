@@ -6,6 +6,7 @@ using UnityEngine;
 public class Unit : UnitBase
 {
     // 스탯 관련 더미 변수
+    float _maxSpeed = 10.0f;
     float _speed = 10.0f;
     float _maxJumpHeight = 1.5f;
     float _defaultJumpHeight = 1.5f;
@@ -31,13 +32,14 @@ public class Unit : UnitBase
     // 공격 관련 변수
     [HideInInspector]
     public int curAttackIndex = 0;
-    public BasicAttack[] basicAttacks;
-    public BasicAttack basicJumpAttack;
+    public AttackBase[] basicAttacks;
+    public AttackBase basicJumpAttack;
 
     // 상태 판단
     private bool _isGround = true;
     public bool IsGround => _isGround;
     private bool _isInvincibility = false;
+    private bool _isStateAbnormality = false;
 
     public AniState CurAniState;
 
@@ -57,6 +59,10 @@ public class Unit : UnitBase
     // Prefabs
     public GameObject skill1GO;
 
+    // skill
+    public bool isSkill1CollTimeOk = true;
+    private float _skill1CoolTime = 5.0f;
+
     private void Start()
     {
         Init();
@@ -72,15 +78,29 @@ public class Unit : UnitBase
 
     public override void Attack()
     {
-        _speed = 2;
         basicAttacks[curAttackIndex].SetDamage(0, 10);
         basicAttacks[curAttackIndex].gameObject.SetActive(true);
     }
 
     public override void Idle()
     {
-        _speed = 10;
     }
+
+    public void SetAttackSpeed()
+    {
+        if (_isStateAbnormality == false)
+            _speed = 2;
+
+        _velocity = Vector2.zero;
+    }
+
+    public void SetMoveSpeed()  // 나중에는 SetPlayerMoveSpeed 이런식으로 해놓고
+                                // PlayerDataCenter 이런 클래스를 통해 데이터를 받아와서 스피드를 조절하자.
+    {
+        if (_isStateAbnormality == false)
+            _speed = 10;
+    }
+
 
     public override void Dash()
     {
@@ -147,6 +167,7 @@ public class Unit : UnitBase
         playerShadowUnit.Skill1();
         var temp = Instantiate(skill1GO, new Vector3(transform.position.x + (0.5f * _facingDir), transform.position.y, transform.position.z), Quaternion.identity);
         temp.GetComponent<Skill1Ctrl>().Init(transform, _facingDir, playerShadowUnit);
+        StartCoroutine(Skill1Tick());
     }
 
     public void Skill1AniEvent()
@@ -160,8 +181,7 @@ public class Unit : UnitBase
 
         _acceleration = _isGround ? _walkAcceleration : _airAcceleration;
         _deceleration = _isGround ? _groundDeceleration : 0;
-        if (TimeManager.isTest)
-            Debug.Log(_velocity.y);
+
         _rigid2D.velocity = new Vector2(_velocity.x, _rigid2D.velocity.y);
 
         AniCtrl.PlayAni(CurAniState);
@@ -223,9 +243,10 @@ public class Unit : UnitBase
         _isStopMoveCoroutineRunning = true;
         while (Mathf.Abs(_velocity.x) >= 0.01f)
         {
-            _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, 0, _deceleration * TimeManager.deltaTime), _rigid2D.velocity.y);
+            _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, 0, _deceleration * Time.deltaTime), _rigid2D.velocity.y);
             yield return null;
         }
+        Debug.Log("Velocity : " + _velocity);
         _isStopMoveCoroutineRunning = false;
     }
 
@@ -243,7 +264,7 @@ public class Unit : UnitBase
         {
             Totaltick += Time.deltaTime;
             tick += Time.deltaTime;
-            Debug.Log(tick);
+
             if (Totaltick >= _invincibilityTime * 0.7f)
             {
                 if (tick >= 0.05f)
@@ -275,5 +296,31 @@ public class Unit : UnitBase
 
         _isInvincibility = false;
         _spriteRenderer.color = new Color32(255, 255, 255, 255);
+    }
+
+    public void SlowStateStart()
+    {
+        StartCoroutine(SlowStateAbnormality());
+    }
+
+    IEnumerator SlowStateAbnormality()
+    {
+        _isStateAbnormality = true;
+        _speed = _speed * 0.1f;
+
+        yield return new WaitForSeconds(1.5f);
+
+        _speed = _maxSpeed;
+        _isStateAbnormality = false;
+    }
+
+    IEnumerator Skill1Tick()
+    {
+        isSkill1CollTimeOk = false;
+
+        yield return new WaitForSeconds(_skill1CoolTime);
+
+        isSkill1CollTimeOk = true;
+
     }
 }

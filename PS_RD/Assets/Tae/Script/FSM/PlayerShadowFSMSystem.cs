@@ -10,6 +10,7 @@ public enum PlayerShadowFSMState
     ControlRecovery,
     Destroy,
     Resurrection,
+    Skill1,
 }
 
 public abstract class PlayerShadowFSMStateBase : IFSMStateBase
@@ -42,6 +43,7 @@ public class PlayerShadowFSMSystem : FSMSystem<PlayerShadowFSMState, PlayerShado
         Unit.OnLightDetectionAction += OnLightDetection;
         Unit.OnResurrectionAction += OnResurrection;
         Unit.OnIdleAction += OnIdle;
+        Unit.OnSkill1StartStateAction += OnSkill1;
     }
 
     private class IdleState : PlayerShadowFSMStateBase
@@ -150,6 +152,27 @@ public class PlayerShadowFSMSystem : FSMSystem<PlayerShadowFSMState, PlayerShado
         }
     }
 
+    private class Skill1State : PlayerShadowFSMStateBase
+    {
+        public Skill1State(PlayerShadowFSMSystem system) : base(system)
+        {
+        }
+
+        public override void EndState()
+        {
+        }
+
+        public override void StartState()
+        {
+            SystemMgr.Unit.shadowAniState = ShadowAniState.Skill1;
+        }
+
+        public override void Update()
+        {
+            SystemMgr.Unit.Progress();
+        }
+    }
+
     protected override void RegisterState()
     {
         AddState(PlayerShadowFSMState.Idle, new IdleState(this));
@@ -157,6 +180,8 @@ public class PlayerShadowFSMSystem : FSMSystem<PlayerShadowFSMState, PlayerShado
         AddState(PlayerShadowFSMState.ControlRecovery, new ControlRecoveryState(this));
         AddState(PlayerShadowFSMState.Destroy, new DestroyState(this));
         AddState(PlayerShadowFSMState.Resurrection, new ResurrectionState(this));
+        AddState(PlayerShadowFSMState.Skill1, new Skill1State(this));
+
     }
 
     public void SetUnit(PlayerShadowUnit unit)
@@ -190,6 +215,11 @@ public class PlayerShadowFSMSystem : FSMSystem<PlayerShadowFSMState, PlayerShado
     private void OnIdle()
     {
         ChangeState(PlayerShadowFSMState.Idle);
+    }
+
+    private void OnSkill1()
+    {
+        ChangeState(PlayerShadowFSMState.Skill1);
     }
 
 }

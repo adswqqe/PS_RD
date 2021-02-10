@@ -58,4 +58,8 @@ public class SkillAttack : AttackBase
     public override void SetDamage(float min, float max)
     {
     }
+    IEnumerator BloodStateAbnormality(Unit unit)
+    {
+        yield return new WaitForSeconds(1.5f);
+    }
 }

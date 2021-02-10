@@ -27,6 +27,8 @@ public abstract class AttackBase : MonoBehaviour
     [SerializeField]
     protected float _bulltTime;
     [SerializeField]
+    protected float _bulletTimeScale;
+    [SerializeField]
     protected float _shakeTime;
     [SerializeField]
     protected float _flashTime;

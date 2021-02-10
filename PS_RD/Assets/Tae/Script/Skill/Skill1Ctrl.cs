@@ -111,6 +111,7 @@ public class Skill1Ctrl : UnitBase
             {
                 Debug.Log("ASdasdasd");
                 collision.gameObject.GetComponent<Unit>().Hit(150);
+                collision.gameObject.GetComponent<Unit>().SlowStateStart();
             }
         }
     }

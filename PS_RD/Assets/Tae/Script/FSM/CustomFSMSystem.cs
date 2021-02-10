@@ -67,8 +67,9 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
             if (SystemMgr.Unit == null)
                 return;
 
-            SystemMgr.Unit.StopMove();
+            //SystemMgr.Unit.StopMove();
             SystemMgr.Unit.CurAniState = AniState.Idle;
+            SystemMgr.Unit.Idle();
             //Debug.Log("IdleState Start");
         }
 
@@ -78,7 +79,6 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
             //    SystemMgr.ChangeState(CustomFSMState.Move);
 
             SystemMgr.Unit.Progress();
-            SystemMgr.Unit.Idle();
 
             if (Input.GetAxisRaw("Horizontal") != 0)
                 SystemMgr.ChangeState(CustomFSMState.Move);
@@ -103,7 +103,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         public override void EndState()
         {
             //Debug.Log("MoveState End");
-            //SystemMgr.Unit.StopMove();    // 나중에 hit <-> 이동 상태간 움직임 버그 있으면 여기 수정
+            SystemMgr.Unit.StopMove();    // 나중에 hit <-> 이동 상태간 움직임 버그 있으면 여기 수정
         }
 
         public override void StartState()
@@ -114,6 +114,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
             _changeStateTimer = 0.25f;
             _isStartStateTimer = false;
             SystemMgr.Unit.CurAniState = AniState.Move;
+            SystemMgr.Unit.SetMoveSpeed();
             //Debug.Log("MoveState Start");
         }
 
@@ -132,6 +133,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
                 SystemMgr.ChangeState(CustomFSMState.Attack);
             else if (Input.GetKeyDown(KeyCode.Space))
                 SystemMgr.ChangeState(CustomFSMState.Dash);
+            else if (Input.GetKeyDown(KeyCode.S))
+                SystemMgr.ChangeState(CustomFSMState.Skill1);
 
             if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
             {
@@ -199,7 +202,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
         public override void StartState()
         {
-            SystemMgr.Unit.StopMove();
+            //SystemMgr.Unit.StopMove();
+            SystemMgr.Unit.SetAttackSpeed();
             _attackBeInputTime = Time.time;
             SystemMgr.Unit.CurAniState = AniState.Attack;
         }
@@ -223,6 +227,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
             }
             else if (Input.GetKeyDown(KeyCode.Space))
                 SystemMgr.ChangeState(CustomFSMState.Dash);
+            else if (Input.GetKeyDown(KeyCode.S))
+                SystemMgr.ChangeState(CustomFSMState.Skill1);
         }
 
         private void EndOrNextCheck()
@@ -427,7 +433,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
         public override void StartState()
         {
-            if (SystemMgr.Unit.playerShadowUnit.isControlAble == false)
+            if (SystemMgr.Unit.playerShadowUnit.isControlAble == false || SystemMgr.Unit.isSkill1CollTimeOk == false)
                 SystemMgr.ChangeState(CustomFSMState.Idle);
             else
             {

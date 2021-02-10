@@ -25,6 +25,7 @@ public enum ShadowAniState // 50~
     ControlRecovery,
     Destroy,
     Resurrection,
+    Skill1,
 }
 
 public class AnimationCtrl : MonoBehaviour

@@ -8,6 +8,8 @@ public class BasicAttack : AttackBase
     float damage = 0.0f;
     [SerializeField]
     bool _testAlwaysAttackTrue;
+    bool isEnter = false;
+
     private void OnEnable()
     {
         if (boxCollider2D == null)
@@ -22,25 +24,23 @@ public class BasicAttack : AttackBase
     {
         AttackDamage();
         PlaySfx();
-        BulltTime();
-        Flash();
-        HitStop();
-        PlayFx();
 
-        Debug.Log(gameObject.name);
+        if (isEnter)
+        {
+            BulltTime();
+            Flash();
+            HitStop();
+            PlayFx();
+        }
+
         gameObject.SetActive(false);
     }
 
     public override void AttackDamage()
     {
-        //크리티컬 확률 계산
-        float criticalRoulette = Random.Range(0, 100);
-        bool isCritical = (_criticalPercentage > criticalRoulette) ? true : false;
-
-
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(transform.position, boxCollider2D.size, 0.0f, _hitLayerMask);
 
-        bool isEnter = false;
+        isEnter = false;
         foreach (var item in collider2Ds)
         {
             if (item.gameObject.name.Contains("Player"))
@@ -49,13 +49,28 @@ public class BasicAttack : AttackBase
             if (item.CompareTag("Enemy") /*&& item.GetComponent<UnitBase>().Status.isAlive*/)
             {
                 isEnter = true;
+
+                //크리티컬 확률 계산
+                float criticalRoulette = Random.Range(0, 100);
+                bool isCritical = (_criticalPercentage > criticalRoulette) ? true : false;
+
+                if(isCritical)
+                {
+
+                }
+                else
+                {
+
+                }
+
                 //EffectManager.Instance.PlayEffect("Hit", item.transform.position);
                 break;
             }
         }
 
         if (isEnter || _testAlwaysAttackTrue)
-        {   //나중에 구현
+        {   
+            //나중에 구현
             //TimeManager.HitStop(hitStopTime);
             //CinemachineManager.Instance.ShakeCamera(caemraShakePower, cameraShakeTime);
             //if (isSkill)
@@ -76,6 +91,8 @@ public class BasicAttack : AttackBase
     {
         if (_isAbleBulltTime == false)
             return;
+
+        UnityTimeManager.instance.BulletTime(_bulltTime, _bulletTimeScale);
     }
 
     public override void Flash()
@@ -91,6 +108,8 @@ public class BasicAttack : AttackBase
     {
         if (_isAbleHitStop == false)
             return;
+
+        UnityTimeManager.instance.HitStop(_hitStopTime);
     }
 
     public override void PlayFx()
