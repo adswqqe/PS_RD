@@ -48,6 +48,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         SetUnit(GetComponentInParent<Unit>());
         Unit.OnDamageAction += OnDamage;
         Unit.OnSkill1TransformAniEvent += OnChangeIdle;
+        Unit.OnHitAniEndAction += OnChangeIdle;
     }
 
     private class IdleState : CustomFSMStateBase
@@ -398,14 +399,18 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
         public override void EndState()
         {
+
         }
 
         public override void StartState()
         {
+            SystemMgr.Unit.CurAniState = AniState.Hit;
+            SystemMgr.Unit.HitKnockBack();
         }
 
         public override void Update()
         {
+            SystemMgr.Unit.Progress();
         }
     }
 
@@ -478,4 +483,5 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
     {
         ChangeState(CustomFSMState.Idle);
     }
+
 }

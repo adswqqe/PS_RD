@@ -36,5 +36,5 @@ public abstract class UnitBase : MonoBehaviour
 
     public abstract void JumpAttack();
 
-    public abstract void Hit();
+    public abstract void Hit(float damage);
 }

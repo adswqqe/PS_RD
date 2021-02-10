@@ -98,7 +98,7 @@ public class PlayerShadowUnit : UnitBase
         isControlAble = false;
     }
 
-    public override void Hit()
+    public override void Hit(float damage)
     {
         // OnCollison으로 변경할 지 고민 해야함.
         OnLightDetectionAction?.Invoke();

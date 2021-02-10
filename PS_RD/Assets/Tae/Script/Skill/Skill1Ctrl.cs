@@ -22,6 +22,8 @@ public class Skill1Ctrl : UnitBase
     bool isAnimationEnd = false;
 
     private PlayerShadowUnit playerShadow;
+    public BoxCollider2D aBoxCollider2D;
+    public BoxCollider2D bBoxCollider2D;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +35,7 @@ public class Skill1Ctrl : UnitBase
     {
         _rigid2D = GetComponent<Rigidbody2D>();
         _animator = GetComponentInChildren<Animator>();
-
+        bBoxCollider2D.enabled = false;
         _playerTr = playerTr;
         spawnPlayerPos = _playerTr.position;
         spawnPos = transform.position;
@@ -66,7 +68,7 @@ public class Skill1Ctrl : UnitBase
             {
                 float posX = Mathf.SmoothDamp(transform.position.x, spawnPlayerPos.x + (0.5f * dir), ref _xVelocity, 0.2f);
                 _rigid2D.MovePosition(new Vector2(posX, transform.position.y));
-                if (Mathf.Abs(spawnPos.x - transform.position.x) <= 0.025f)
+                if (Mathf.Abs(spawnPos.x - transform.position.x) <= 0.03f)
                     DestroySkill();
             }
         }
@@ -83,6 +85,8 @@ public class Skill1Ctrl : UnitBase
         _animator.SetInteger("State", 1);
         dir *= -1;
         _rigid2D.velocity = Vector2.zero;
+        aBoxCollider2D.enabled = false;
+        bBoxCollider2D.enabled = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -105,7 +109,8 @@ public class Skill1Ctrl : UnitBase
         {
             if(collision.gameObject.tag == "Player")
             {
-                //collision.gameObject.GetComponent<Unit>().Hit();
+                Debug.Log("ASdasdasd");
+                collision.gameObject.GetComponent<Unit>().Hit(150);
             }
         }
     }
@@ -143,9 +148,10 @@ public class Skill1Ctrl : UnitBase
 
     public override void JumpAttack()
     {
+
     }
 
-    public override void Hit()
+    public override void Hit(float damage)
     {
 
     }

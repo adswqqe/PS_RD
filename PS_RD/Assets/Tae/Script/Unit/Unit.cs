@@ -9,6 +9,9 @@ public class Unit : UnitBase
     float _speed = 10.0f;
     float _maxJumpHeight = 1.5f;
     float _defaultJumpHeight = 1.5f;
+    float _curHp = 0;
+    float _maxHp = 1000;
+    float _invincibilityTime = 1.0f;
 
     // 이동 관련 변수
     float _walkAcceleration = 75;
@@ -34,6 +37,7 @@ public class Unit : UnitBase
     // 상태 판단
     private bool _isGround = true;
     public bool IsGround => _isGround;
+    private bool _isInvincibility = false;
 
     public AniState CurAniState;
 
@@ -43,10 +47,12 @@ public class Unit : UnitBase
     public Vector2 groundCheckBoxSize;
     public LayerMask groundLayer;
     public PlayerShadowUnit playerShadowUnit;
+    public SpriteRenderer _spriteRenderer;
 
     // Events
     public event UnityAction OnDamageAction;
     public event UnityAction OnSkill1TransformAniEvent;
+    public event UnityAction OnHitAniEndAction;
 
     // Prefabs
     public GameObject skill1GO;
@@ -61,6 +67,7 @@ public class Unit : UnitBase
         //FsmSystem.SetUnit(this);
         _velocity = Vector2.zero;
         _rigid2D = GetComponent<Rigidbody2D>();
+        _curHp = _maxHp;
     }
 
     public override void Attack()
@@ -106,9 +113,33 @@ public class Unit : UnitBase
             _velocity = new Vector2(Mathf.MoveTowards(_velocity.x, 0, _deceleration * Time.deltaTime), _rigid2D.velocity.y);
     }
 
-    public override void Hit()
+    public override void Hit(float damage)
     {
+        if (_isInvincibility == true)
+            return;
+
+        _curHp -= damage;
+
+        if(_curHp <= 0) // 사망
+        {
+
+        }
+        else
+        {
+            StartCoroutine(HitTime());
+        }
+
         OnDamageAction?.Invoke();
+    }
+
+    public void HitKnockBack()
+    {
+        _rigid2D.MovePosition(new Vector2(transform.position.x - (0.5f * _facingDir), transform.position.y + 0.5f));
+    }
+
+    public void HitAniEnd()
+    {
+        OnHitAniEndAction?.Invoke();
     }
 
     public void Skill1()
@@ -196,5 +227,53 @@ public class Unit : UnitBase
             yield return null;
         }
         _isStopMoveCoroutineRunning = false;
+    }
+
+    IEnumerator HitTime()
+    {
+        _isInvincibility = true;
+        float Totaltick = 0;
+        float tick = 0;
+        int count = 0;
+
+        _spriteRenderer.color = new Color32(70, 70, 70, 255);
+
+
+        while (true)
+        {
+            Totaltick += Time.deltaTime;
+            tick += Time.deltaTime;
+            Debug.Log(tick);
+            if (Totaltick >= _invincibilityTime * 0.7f)
+            {
+                if (tick >= 0.05f)
+                {
+                    count++;
+
+                    if (count % 2 == 0)
+                    {
+                        _spriteRenderer.color = new Color32(70, 70, 70, 255);
+                    }
+                    else
+                    {
+                        _spriteRenderer.color = new Color32(255, 255, 255, 255);
+                        //Debug.Log("asdasdsadasd");
+                    }
+
+                    tick = 0;
+                }
+            }
+
+
+            if (Totaltick >= _invincibilityTime)
+                break;
+
+            yield return null;
+        }
+
+        //yield return new WaitForSeconds(Status.hitTime);
+
+        _isInvincibility = false;
+        _spriteRenderer.color = new Color32(255, 255, 255, 255);
     }
 }
