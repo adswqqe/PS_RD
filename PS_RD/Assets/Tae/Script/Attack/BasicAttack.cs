@@ -29,6 +29,7 @@ public class BasicAttack : AttackBase
         {
             BulltTime();
             Flash();
+            CameraShake();
             HitStop();
             PlayFx();
         }
@@ -121,6 +122,11 @@ public class BasicAttack : AttackBase
     public override void PlaySfx()
     {
 
+    }
+
+    public override void CameraShake()
+    {
+        CinemachineManager.Instance.ShakeCamera(_cameraShakePower, _camerShakeTime);
     }
 
     public override void SetDamage(float min, float max)

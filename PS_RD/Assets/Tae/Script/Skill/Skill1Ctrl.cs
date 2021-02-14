@@ -7,6 +7,7 @@ public class Skill1Ctrl : UnitBase
 {
     public Animator _animator;
     public SkillAttack skillAttack;
+    public SkillAttack skillExAttack;
     Transform _playerTr;
     Vector3 spawnPlayerPos;
     public Rigidbody2D _rigid2D;
@@ -89,6 +90,12 @@ public class Skill1Ctrl : UnitBase
         bBoxCollider2D.enabled = true;
     }
 
+    public void SetSkill1Ex()
+    {
+        _animator.SetInteger("State", 2);
+        _playerTr.GetComponent<Unit>().Skill1Ex();
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -121,6 +128,17 @@ public class Skill1Ctrl : UnitBase
         isAnimationEnd = true;
     }
 
+    public void Skill1ExAttackTrigger()
+    {
+        Skill1ExAttack();
+    }
+
+    public void Skill1ExAiEnd()
+    {
+        playerShadow.Skill1End();
+        Destroy(this.gameObject);
+    }
+
     public override void Progress()
     {
     }
@@ -137,6 +155,12 @@ public class Skill1Ctrl : UnitBase
     {
         skillAttack.SetDamage(0, 10);
         skillAttack.gameObject.SetActive(true);
+    }
+
+    public void Skill1ExAttack()
+    {
+        skillExAttack.SetDamage(0, 10);
+        skillExAttack.gameObject.SetActive(true);
     }
 
     public override void Jump(float height)

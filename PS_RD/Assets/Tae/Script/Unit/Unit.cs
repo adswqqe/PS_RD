@@ -175,6 +175,16 @@ public class Unit : UnitBase
         OnSkill1TransformAniEvent?.Invoke();
     }
 
+    public void Skill1Ex()
+    {
+        _curHp += _maxHp * 0.3f;
+
+        if (_curHp > _maxHp)
+            _curHp = _maxHp;
+
+
+    }
+
     public override void Progress()
     {
         CheckGround();

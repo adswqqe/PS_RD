@@ -584,13 +584,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 165573922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c0d2d6bb7d3877498052e97cfa0d600, type: 3}
+  m_Script: {fileID: 11500000, guid: 31e83241346a69145943c22045a28721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isAbleCritical: 0
   _isAbleFlash: 0
   _isAbleHitStop: 0
   _isAbleBulltTime: 0
+  _isAbleCameraShake: 0
   _isDisplyFx: 0
   _hitStopTime: 0
   _bulltTime: 0
@@ -598,6 +599,8 @@ MonoBehaviour:
   _shakeTime: 0
   _flashTime: 0
   _criticalPercentage: 0
+  _camerShakeTime: 0
+  _cameraShakePower: 0
   _hitLayerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -1039,6 +1042,7 @@ MonoBehaviour:
   _isAbleFlash: 0
   _isAbleHitStop: 0
   _isAbleBulltTime: 0
+  _isAbleCameraShake: 0
   _isDisplyFx: 0
   _hitStopTime: 0
   _bulltTime: 0
@@ -1046,6 +1050,8 @@ MonoBehaviour:
   _shakeTime: 0
   _flashTime: 0
   _criticalPercentage: 0
+  _camerShakeTime: 0
+  _cameraShakePower: 0
   _hitLayerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -1279,13 +1285,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 836017990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c0d2d6bb7d3877498052e97cfa0d600, type: 3}
+  m_Script: {fileID: 11500000, guid: 31e83241346a69145943c22045a28721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isAbleCritical: 0
   _isAbleFlash: 0
   _isAbleHitStop: 0
   _isAbleBulltTime: 0
+  _isAbleCameraShake: 0
   _isDisplyFx: 0
   _hitStopTime: 0
   _bulltTime: 0
@@ -1293,6 +1300,8 @@ MonoBehaviour:
   _shakeTime: 0
   _flashTime: 0
   _criticalPercentage: 0
+  _camerShakeTime: 0
+  _cameraShakePower: 0
   _hitLayerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -1965,6 +1974,7 @@ MonoBehaviour:
   _isAbleFlash: 0
   _isAbleHitStop: 0
   _isAbleBulltTime: 0
+  _isAbleCameraShake: 0
   _isDisplyFx: 0
   _hitStopTime: 0
   _bulltTime: 0
@@ -1972,6 +1982,8 @@ MonoBehaviour:
   _shakeTime: 0
   _flashTime: 0
   _criticalPercentage: 0
+  _camerShakeTime: 0
+  _cameraShakePower: 0
   _hitLayerMask:
     serializedVersion: 2
     m_Bits: 0
