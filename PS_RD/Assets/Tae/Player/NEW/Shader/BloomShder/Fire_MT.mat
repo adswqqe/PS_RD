@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WMT_1
-  m_Shader: {fileID: -6465566751694194690, guid: 9e535c1071393ff409d35cb6f62d203f,
+  m_Name: Fire_MT
+  m_Shader: {fileID: -6465566751694194690, guid: 5e1a0e7974b4da34ab716617ffe3d15b,
     type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
@@ -20,15 +20,11 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_25C0501F:
-        m_Texture: {fileID: 2800000, guid: 7ca924a5d5296fa4fa7a257124f33166, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_9F42234D:
-        m_Texture: {fileID: 8400000, guid: b80b6a7a5547e904586aa9540d436598, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emission:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -45,11 +41,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_607742CD: 0.5
-    - Vector1_BB363085: 1.112
     - _EnableExternalAlpha: 0
     m_Colors:
-    - Color_9A8F8D05: {r: 0.59607846, g: 0.6901961, b: 0.827451, a: 1}
+    - Color_79988DDE: {r: 1.8443027, g: 1.2070043, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
