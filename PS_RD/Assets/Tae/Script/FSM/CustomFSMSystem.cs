@@ -16,6 +16,7 @@ public enum CustomFSMState
     DoubleJump,
     JumpAttack,
     Skill1,
+    Backstep,
 }
 
 public abstract class CustomFSMStateBase : IFSMStateBase
@@ -92,6 +93,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
                 SystemMgr.ChangeState(CustomFSMState.Dash);
             else if (Input.GetKeyDown(KeyCode.S))
                 SystemMgr.ChangeState(CustomFSMState.Skill1);
+            else if (Input.GetKeyDown(KeyCode.Z))
+                SystemMgr.ChangeState(CustomFSMState.Backstep);
         }
     }
 
@@ -394,9 +397,28 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         public override void Update()
         {
             SystemMgr.Unit.Progress();
+        }
+    }
 
-            if (Input.GetKeyDown(KeyCode.Z))
-                SystemMgr.ChangeState(CustomFSMState.Idle);
+    private class BackstepState : CustomFSMStateBase
+    {
+        public BackstepState(CustomFSMSystem system) : base(system)
+        {
+        }
+
+        public override void EndState()
+        {
+        }
+
+        public override void StartState()
+        {
+            SystemMgr.Unit.CurAniState = AniState.Dash;
+            SystemMgr.Unit.Backstep();
+        }
+
+        public override void Update()
+        {
+            SystemMgr.Unit.Progress();
         }
     }
 
@@ -462,7 +484,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         AddState(CustomFSMState.JumpAttack, new JumpAttackState(this));
         AddState(CustomFSMState.Hit, new HitState(this));
         AddState(CustomFSMState.Skill1, new Skill1State(this));
-
+        AddState(CustomFSMState.Backstep, new BackstepState(this));
     }
 
     public void EndAttack()

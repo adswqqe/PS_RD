@@ -14,6 +14,7 @@ public class Unit : UnitBase
     float _maxHp = 1000;
     float _invincibilityTime = 1.0f;
     float _dashSpeed = 1.0f;
+    float _backstepSpeed = 1.0f;
 
     // 이동 관련 변수
     float _walkAcceleration = 75;
@@ -114,6 +115,11 @@ public class Unit : UnitBase
         OnDashAniEndAction?.Invoke();
         _velocity = Vector2.zero;
         _isInvincibility = false;
+    }
+
+    public void Backstep()
+    {
+        _velocity = new Vector2(_velocity.x + (_speed + _backstepSpeed) * (_facingDir * -1), _velocity.y);
     }
 
     public override void Jump(float height)
