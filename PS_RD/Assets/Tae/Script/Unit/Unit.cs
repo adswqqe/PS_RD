@@ -13,6 +13,7 @@ public class Unit : UnitBase
     float _curHp = 0;
     float _maxHp = 1000;
     float _invincibilityTime = 1.0f;
+    float _dashSpeed = 1.0f;
 
     // 이동 관련 변수
     float _walkAcceleration = 75;
@@ -55,6 +56,7 @@ public class Unit : UnitBase
     public event UnityAction OnDamageAction;
     public event UnityAction OnSkill1TransformAniEvent;
     public event UnityAction OnHitAniEndAction;
+    public event UnityAction OnDashAniEndAction;
 
     // Prefabs
     public GameObject skill1GO;
@@ -101,10 +103,17 @@ public class Unit : UnitBase
             _speed = 10;
     }
 
-
     public override void Dash()
     {
-        _rigid2D.velocity = new Vector2(_velocity.x + 10, _velocity.y) * Time.timeScale;
+        _velocity = new Vector2(_velocity.x + (_speed + _dashSpeed) * _facingDir, _velocity.y);
+        _isInvincibility = true;
+    }
+
+    public void DashAniEndEvent()
+    {
+        OnDashAniEndAction?.Invoke();
+        _velocity = Vector2.zero;
+        _isInvincibility = false;
     }
 
     public override void Jump(float height)

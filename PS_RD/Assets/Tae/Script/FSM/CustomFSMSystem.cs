@@ -49,6 +49,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         Unit.OnDamageAction += OnDamage;
         Unit.OnSkill1TransformAniEvent += OnChangeIdle;
         Unit.OnHitAniEndAction += OnChangeIdle;
+        Unit.OnDashAniEndAction += OnChangeIdle;
     }
 
     private class IdleState : CustomFSMStateBase
@@ -79,6 +80,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
             //    SystemMgr.ChangeState(CustomFSMState.Move);
 
             SystemMgr.Unit.Progress();
+            SystemMgr.Unit.Move(0);
 
             if (Input.GetAxisRaw("Horizontal") != 0)
                 SystemMgr.ChangeState(CustomFSMState.Move);
@@ -103,7 +105,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
         public override void EndState()
         {
             //Debug.Log("MoveState End");
-            SystemMgr.Unit.StopMove();    // 나중에 hit <-> 이동 상태간 움직임 버그 있으면 여기 수정
+            //SystemMgr.Unit.StopMove();    // 나중에 hit <-> 이동 상태간 움직임 버그 있으면 여기 수정
         }
 
         public override void StartState()
@@ -380,6 +382,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
         public override void EndState()
         {
+
         }
 
         public override void StartState()

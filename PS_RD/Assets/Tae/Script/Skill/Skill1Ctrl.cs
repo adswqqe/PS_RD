@@ -77,8 +77,8 @@ public class Skill1Ctrl : UnitBase
 
     private void DestroySkill()
     {
-        playerShadow.Skill1End();
-        Destroy(this.gameObject);
+        //playerShadow.Skill1End();
+        //Destroy(this.gameObject);
     }
 
     private void InitTransformB()
@@ -116,7 +116,6 @@ public class Skill1Ctrl : UnitBase
         {
             if(collision.gameObject.tag == "Player")
             {
-                Debug.Log("ASdasdasd");
                 collision.gameObject.GetComponent<Unit>().Hit(150);
                 collision.gameObject.GetComponent<Unit>().SlowStateStart();
             }

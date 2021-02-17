@@ -9,7 +9,7 @@ public class TriggerAttack : AttackBase
     [SerializeField]
     bool _testAlwaysAttackTrue;
     bool isEnter = false;
-    bool isSkillEnter = true;
+    bool isSkillEnter = false;
 
     private void OnEnable()
     {
@@ -51,15 +51,17 @@ public class TriggerAttack : AttackBase
     public override void AttackDamage()
     {
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(transform.position, boxCollider2D.size, 0.0f, _hitLayerMask);
-
         isEnter = false;
         foreach (var item in collider2Ds)
         {
+            Debug.Log(item.name);
+
             if (item.gameObject.name.Contains("Player"))
                 continue;
 
-            if(item.gameObject.tag == "Skill1")
+            if(item.gameObject.tag == "Skill")
             {
+                Debug.Log("asdasdasd");
                 // Skill1 
                 item.GetComponent<Skill1Ctrl>().SetSkill1Ex();
             }
