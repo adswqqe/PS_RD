@@ -140,6 +140,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
                 SystemMgr.ChangeState(CustomFSMState.Dash);
             else if (Input.GetKeyDown(KeyCode.S))
                 SystemMgr.ChangeState(CustomFSMState.Skill1);
+            else if (Input.GetKeyDown(KeyCode.Z))
+                SystemMgr.ChangeState(CustomFSMState.Backstep);
 
             if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
             {
@@ -234,6 +236,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
                 SystemMgr.ChangeState(CustomFSMState.Dash);
             else if (Input.GetKeyDown(KeyCode.S))
                 SystemMgr.ChangeState(CustomFSMState.Skill1);
+            else if (Input.GetKeyDown(KeyCode.Z))
+                SystemMgr.ChangeState(CustomFSMState.Backstep);
         }
 
         private void EndOrNextCheck()
