@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_New Shader Graph
+  m_Name: Waterfall_MT
   m_Shader: {fileID: -6465566751694194690, guid: 2006ed3e6bceabf47a1315e3652bf817,
     type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA

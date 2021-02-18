@@ -138,7 +138,7 @@ TextureImporter:
       name: 2DObj_UnderTemple_M_DefaultTile_1
       rect:
         serializedVersion: 2
-        x: 25
+        x: 24
         y: 0
         width: 24
         height: 24
@@ -159,7 +159,7 @@ TextureImporter:
       name: 2DObj_UnderTemple_M_DefaultTile_2
       rect:
         serializedVersion: 2
-        x: 50
+        x: 48
         y: 0
         width: 24
         height: 24
@@ -180,7 +180,7 @@ TextureImporter:
       name: 2DObj_UnderTemple_M_DefaultTile_3
       rect:
         serializedVersion: 2
-        x: 75
+        x: 72
         y: 0
         width: 24
         height: 24
@@ -201,7 +201,7 @@ TextureImporter:
       name: 2DObj_UnderTemple_M_DefaultTile_4
       rect:
         serializedVersion: 2
-        x: 100
+        x: 96
         y: 0
         width: 24
         height: 24
@@ -222,7 +222,7 @@ TextureImporter:
       name: 2DObj_UnderTemple_M_DefaultTile_5
       rect:
         serializedVersion: 2
-        x: 125
+        x: 120
         y: 0
         width: 24
         height: 24
@@ -243,7 +243,7 @@ TextureImporter:
       name: 2DObj_UnderTemple_M_DefaultTile_6
       rect:
         serializedVersion: 2
-        x: 150
+        x: 144
         y: 0
         width: 24
         height: 24
@@ -264,7 +264,7 @@ TextureImporter:
       name: 2DObj_UnderTemple_M_DefaultTile_7
       rect:
         serializedVersion: 2
-        x: 175
+        x: 168
         y: 0
         width: 24
         height: 24
@@ -285,7 +285,7 @@ TextureImporter:
       name: 2DObj_UnderTemple_M_DefaultTile_8
       rect:
         serializedVersion: 2
-        x: 200
+        x: 192
         y: 0
         width: 24
         height: 24
@@ -305,7 +305,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 757bd0169e45b1e45ace5cb2e2f3ebaf
     internalID: 0
     vertices: []
     indices: 
