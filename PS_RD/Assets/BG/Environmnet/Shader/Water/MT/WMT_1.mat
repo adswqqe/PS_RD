@@ -46,7 +46,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_607742CD: 0.5
-    - Vector1_BB363085: 1.112
+    - Vector1_BB363085: 2
     - _EnableExternalAlpha: 0
     m_Colors:
     - Color_9A8F8D05: {r: 0.59607846, g: 0.6901961, b: 0.827451, a: 1}
