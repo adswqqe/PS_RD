@@ -1340,7 +1340,7 @@ GameObject:
   - component: {fileID: 1905538355}
   - component: {fileID: 1905538358}
   - component: {fileID: 1905538357}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: PlayerUnit
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1846,7 +1846,7 @@ PrefabInstance:
     - target: {fileID: 7641444266247976984, guid: bea8fd632e6f16840af25185d92a9df8,
         type: 3}
       propertyPath: _attackDistance
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7641444266247976984, guid: bea8fd632e6f16840af25185d92a9df8,
         type: 3}
@@ -1856,7 +1856,7 @@ PrefabInstance:
     - target: {fileID: 7641444266247976984, guid: bea8fd632e6f16840af25185d92a9df8,
         type: 3}
       propertyPath: _searchCircleRadius
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8016550168176131654, guid: bea8fd632e6f16840af25185d92a9df8,
         type: 3}

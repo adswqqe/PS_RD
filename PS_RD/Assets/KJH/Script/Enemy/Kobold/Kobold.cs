@@ -15,7 +15,9 @@ public class Kobold : UnitBase
     public BoxCollider2D[] nextGroundCheckCollider;
     public LayerMask groundLayer;
 
-    public MonsterStat _stat;
+    public MonsterStat stat;
+    public GameObject bulletPrefab;
+    public Transform bulletPos;
 
     public float accelation;
     public float maxSpeed;
@@ -61,7 +63,11 @@ public class Kobold : UnitBase
     public override void Attack() {}
     public void CustomAttack(UnitBase target)
     {
-
+        GameObject bullet = GameObject.Instantiate(bulletPrefab);
+        if (bullet)
+        {
+            bullet.GetComponent<KoboldProjectile>().Initiate(bulletPos.position, new Vector3(target.transform.position.x, bulletPos.position.y), this);
+        }
     }
 
     public override void Jump(float height)
@@ -79,9 +85,9 @@ public class Kobold : UnitBase
 
     public override void Hit(float damage)
     {
-        _stat.nowHP -= damage;
+        stat.nowHP -= damage;
 
-        if (_stat.nowHP > 0)
+        if (stat.nowHP > 0)
         {
             damageEvent.Invoke();
         }
