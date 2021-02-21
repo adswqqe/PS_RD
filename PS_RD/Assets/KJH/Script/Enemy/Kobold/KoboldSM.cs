@@ -249,7 +249,6 @@ namespace EnemyKobold
         {
             fsm.unit.Idle();
             fsm.anim.ChangeAnim(KoboldAnim.Attack);
-            fsm.unit.CustomAttack(fsm.targetUnit);
             _attackDelay = 0;
             Debug.Log("Kobold Fight State start");
         }
@@ -260,7 +259,8 @@ namespace EnemyKobold
             if (_attackDelay > 3)
             {
                 fsm.anim.ChangeAnim(KoboldAnim.Attack);
-                fsm.unit.CustomAttack(fsm.targetUnit);
+                // 코볼트의 공격 시키는 유니티 애니메이션 이벤트를 받아서 처리합니다. KoboldAnimationEventListener 클래스를 참고해 주세요.
+                //fsm.unit.CustomAttack(fsm.targetUnit);
                 _attackDelay = 0;
             }
 
