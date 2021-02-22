@@ -16,7 +16,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   color:
     m_OverrideState: 1
-    m_Value: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+    m_Value: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
     hdr: 0
     showAlpha: 0
     showEyeDropper: 1
@@ -25,7 +25,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.226
+    m_Value: 0.355
     min: 0
     max: 1
   smoothness:
@@ -301,8 +301,8 @@ MonoBehaviour:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0.0066006603
-          value: 0.5460993
+          time: 0
+          value: 0.7692308
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -310,8 +310,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.16831683
-          value: 0.14893615
+          time: 0.17320262
+          value: 0.2867133
           inSlope: -0.23877077
           outSlope: -0.23877077
           tangentMode: 0
@@ -319,8 +319,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.5874587
-          value: 0.26241136
+          time: 0.57843137
+          value: 0.4195804
           inSlope: 0.6320403
           outSlope: 0.6320403
           tangentMode: 0
@@ -328,8 +328,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.6765677
-          value: 0.4893617
+          time: 0.6405229
+          value: 0.7972028
           inSlope: 0.07958487
           outSlope: 0.07958487
           tangentMode: 0
@@ -337,8 +337,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.9240924
-          value: 0
+          time: 0.89215684
+          value: 0.21678323
           inSlope: 0
           outSlope: 0
           tangentMode: 0
