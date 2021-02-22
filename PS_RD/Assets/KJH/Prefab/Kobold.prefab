@@ -559,9 +559,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4131629227526736837, guid: 13a754cbe9eb8084da2f5a0e51011f24,
     type: 3}
   bulletPos: {fileID: 830562006045134013}
-  accelation: 0
-  maxSpeed: 0
   _horizonalSpeed: 0
+  _target: {fileID: 0}
   damageEvent:
     m_PersistentCalls:
       m_Calls:
@@ -604,7 +603,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   unit: {fileID: 0}
-  targetUnit: {fileID: 0}
   light: {fileID: 4806874474793953637}
   _lookDir: {x: 0, y: 0, z: 0}
   _viewAngle: 0
