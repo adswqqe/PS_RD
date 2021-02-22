@@ -1,7 +1,22 @@
 fileFormatVersion: 2
 guid: 7035685b65dbea14f93a923b8e3691d1
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -8152777812576023496
+    second: 2Danim_PC_Skill_ReturnAttack_0
+  - first:
+      213: 7903455416390189939
+    second: 2Danim_PC_Skill_ReturnAttack_1
+  - first:
+      213: -8944334090891479299
+    second: 2Danim_PC_Skill_ReturnAttack_2
+  - first:
+      213: -499384609797112553
+    second: 2Danim_PC_Skill_ReturnAttack_3
+  - first:
+      213: -8543828217768295002
+    second: 2Danim_PC_Skill_ReturnAttack_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -97,11 +112,116 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: 2Danim_PC_Skill_ReturnAttack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 72
+        height: 48
+      alignment: 9
+      pivot: {x: 48, y: 48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83c48b456c38bde80800000000000000
+      internalID: -8152777812576023496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2Danim_PC_Skill_ReturnAttack_1
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 72
+        height: 48
+      alignment: 9
+      pivot: {x: 48, y: 48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3730310b3d6bead60800000000000000
+      internalID: 7903455416390189939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2Danim_PC_Skill_ReturnAttack_2
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 72
+        height: 48
+      alignment: 9
+      pivot: {x: 48, y: 48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df63fff88875fd380800000000000000
+      internalID: -8944334090891479299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2Danim_PC_Skill_ReturnAttack_3
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 0
+        width: 72
+        height: 48
+      alignment: 9
+      pivot: {x: 48, y: 48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71dfebed754d119f0800000000000000
+      internalID: -499384609797112553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2Danim_PC_Skill_ReturnAttack_4
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 72
+        height: 48
+      alignment: 9
+      pivot: {x: 48, y: 48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a546f9c0893e6980800000000000000
+      internalID: -8543828217768295002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 76db9fbc04f92314cafd46ec3c7c9ff5
     internalID: 0
     vertices: []
     indices: 

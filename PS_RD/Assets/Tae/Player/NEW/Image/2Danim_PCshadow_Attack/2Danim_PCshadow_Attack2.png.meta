@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: 8966fe834bbbe694f9d803fdd67b571a
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -1071061759277747331
+    second: 2Danim_PCshadow_Attack2_0
+  - first:
+      213: -4952418126147186249
+    second: 2Danim_PCshadow_Attack2_1
+  - first:
+      213: -2478817474409565283
+    second: 2Danim_PCshadow_Attack2_2
+  - first:
+      213: 3911602609139918645
+    second: 2Danim_PCshadow_Attack2_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -97,11 +109,95 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: 2Danim_PCshadow_Attack2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 72
+        height: 48
+      alignment: 9
+      pivot: {x: 48, y: 48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d73beb13103d221f0800000000000000
+      internalID: -1071061759277747331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2Danim_PCshadow_Attack2_1
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 72
+        height: 48
+      alignment: 9
+      pivot: {x: 48, y: 48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b19acb04f9754bb0800000000000000
+      internalID: -4952418126147186249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2Danim_PCshadow_Attack2_2
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 72
+        height: 48
+      alignment: 9
+      pivot: {x: 48, y: 48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9379cee3a8799dd0800000000000000
+      internalID: -2478817474409565283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2Danim_PCshadow_Attack2_3
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 0
+        width: 72
+        height: 48
+      alignment: 9
+      pivot: {x: 48, y: 48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 537a64439ddc84630800000000000000
+      internalID: 3911602609139918645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 86e2a282408d4914c85a8da83f274274
     internalID: 0
     vertices: []
     indices: 
