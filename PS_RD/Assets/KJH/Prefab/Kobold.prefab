@@ -67,7 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4745185168091427201}
   - component: {fileID: 4668223659399638514}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -495,9 +495,9 @@ GameObject:
   - component: {fileID: 7641444266247976984}
   - component: {fileID: 2306170667230961796}
   - component: {fileID: 813692257801624310}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Kobold
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -552,7 +552,7 @@ MonoBehaviour:
     DEF: 0
     minAtk: 1
     maxAtk: 10
-    moveSpeed: 0
+    moveSpeed: 1
     jumpPower: 0
     shotSpeed: 0
     attackMove: 0

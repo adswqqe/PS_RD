@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7081559233299898061}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rendering
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7462972368262355946}
   - component: {fileID: 9095892311715885548}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1348798521302614247}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3697006795411853674}
   - component: {fileID: 6098883889068668289}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AttackBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 8746836224564296725}
   - component: {fileID: 8746836224564296727}
   - component: {fileID: 8746836224564296724}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,9 +288,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8746836225495989533}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HumanType
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -322,7 +322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4087980359660321888}
   - component: {fileID: 7082340521897705049}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Physics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
