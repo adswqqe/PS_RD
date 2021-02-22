@@ -6,21 +6,25 @@ namespace EnemyKobold
 {
     public class KoboldAnimationEventListener : MonoBehaviour
     {
-        private KoboldSM _fsm;
+        private Kobold _kobold;
+        private KoboldAnimCtrl _anim;
 
     private void Awake()
         {
-            _fsm = GetComponentInParent<KoboldSM>();
+            _kobold = GetComponentInParent<Kobold>();
+            _anim = GetComponentInParent<KoboldAnimCtrl>();
         }
 
         public void AnimEvent_Attack()
         {
-            _fsm.unit.CustomAttack(_fsm.targetUnit);
+            if (_kobold)
+                _kobold.Attack();
         }
 
         public void AnimEvent_AttackEnd()
         {
-            _fsm.anim.ChangeAnim(KoboldAnim.Idle);
+            if (_anim)
+                _anim.ChangeAnim((int)KoboldAnim.Idle);
         }
     }
 }

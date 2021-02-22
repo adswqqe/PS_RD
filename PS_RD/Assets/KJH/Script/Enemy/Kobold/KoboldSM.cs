@@ -19,9 +19,10 @@ namespace EnemyKobold
 
         [HideInInspector]
         public KoboldAnimCtrl anim;
+        private string[] _animName = new string[6] { "Idle", "Walk", "Attack", "Hit1", "Hit2", "Die" };
         [HideInInspector]
         public Kobold unit;
-        public UnitBase targetUnit;
+        private UnitBase targetUnit;
 
         public GameObject light;
 
@@ -85,6 +86,7 @@ namespace EnemyKobold
 
         public bool CheckView()
         {
+            targetUnit = unit.Target;
             if (targetUnit == null)
                 return false;
 
@@ -176,7 +178,7 @@ namespace EnemyKobold
         public override void enter(KoboldSM fsm)
         {
             //fsm.anim.ChangeAnim(KoboldAnim.Run);
-            _targetPosition = fsm.targetUnit.transform.position;
+            _targetPosition = fsm.unit.Target.transform.position;
             _originalPosition = fsm.transform.position;
             _returnTime = 0;
             _returning = false;
@@ -203,7 +205,7 @@ namespace EnemyKobold
             if (checkVeiw)
             {
                 fsm.light.SetActive(true);
-                _targetPosition = fsm.targetUnit.transform.position;
+                _targetPosition = fsm.unit.Target.transform.position;
                 _returning = false;
                 _returnTime = 0;
             }
@@ -264,7 +266,7 @@ namespace EnemyKobold
                 _attackDelay = 0;
             }
 
-            fsm.SetDirection(fsm.targetUnit.transform.position.x > fsm.transform.position.x);
+            fsm.SetDirection(fsm.unit.Target.transform.position.x > fsm.transform.position.x);
 
             if (!fsm.CheckAttackable())
                 fsm.ChangeState(fsm.chaseState);

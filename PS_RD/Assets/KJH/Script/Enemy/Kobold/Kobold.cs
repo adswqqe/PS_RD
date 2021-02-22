@@ -19,14 +19,19 @@ public class Kobold : UnitBase
     public GameObject bulletPrefab;
     public Transform bulletPos;
 
-    public float accelation;
-    public float maxSpeed;
+    //public float accelation;
+    //public float maxSpeed;
     [SerializeField]
     private float _horizonalSpeed;
     public bool NotMovable
     {
         get{ return !CheckMovable(_horizonalSpeed > 0); }
     }
+
+    [SerializeField]
+    private UnitBase _target;
+    public UnitBase Target
+    { get { return _target; } set { _target = value; } }
 
     public UnityEvent damageEvent;
     public UnityEvent dieEvent;
@@ -60,13 +65,12 @@ public class Kobold : UnitBase
         _horizonalSpeed = deltaX;
     }
 
-    public override void Attack() {}
-    public void CustomAttack(UnitBase target)
+    public override void Attack()
     {
         GameObject bullet = GameObject.Instantiate(bulletPrefab);
         if (bullet)
         {
-            bullet.GetComponent<KoboldProjectile>().Initiate(bulletPos.position, new Vector3(target.transform.position.x, bulletPos.position.y), this);
+            bullet.GetComponent<KoboldProjectile>().Initiate(bulletPos.position, new Vector3(_target.transform.position.x, bulletPos.position.y), this);
         }
     }
 
