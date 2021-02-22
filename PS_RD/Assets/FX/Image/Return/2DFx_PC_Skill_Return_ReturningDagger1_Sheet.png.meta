@@ -1,7 +1,28 @@
 fileFormatVersion: 2
 guid: 3c2f26d05e6db2348975adc8a95eae5b
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 6868743360665690798
+    second: 2DFx_PC_Skill_Return_ReturningDagger1_Sheet_0
+  - first:
+      213: -6691505141694725889
+    second: 2DFx_PC_Skill_Return_ReturningDagger1_Sheet_1
+  - first:
+      213: -7992189916933065230
+    second: 2DFx_PC_Skill_Return_ReturningDagger1_Sheet_2
+  - first:
+      213: 1775054978420304838
+    second: 2DFx_PC_Skill_Return_ReturningDagger1_Sheet_3
+  - first:
+      213: -9212197871685530119
+    second: 2DFx_PC_Skill_Return_ReturningDagger1_Sheet_4
+  - first:
+      213: 6728413817037352855
+    second: 2DFx_PC_Skill_Return_ReturningDagger1_Sheet_5
+  - first:
+      213: 4347680513700924776
+    second: 2DFx_PC_Skill_Return_ReturningDagger1_Sheet_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -40,7 +61,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -85,7 +106,154 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_Return_ReturningDagger1_Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 96
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea22dc1c1bda25f50800000000000000
+      internalID: 6868743360665690798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_Return_ReturningDagger1_Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 144
+        width: 96
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff00698d68ff223a0800000000000000
+      internalID: -6691505141694725889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_Return_ReturningDagger1_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 144
+        width: 96
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f5febf6d99061190800000000000000
+      internalID: -7992189916933065230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_Return_ReturningDagger1_Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 72
+        width: 96
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cbe785291342a810800000000000000
+      internalID: 1775054978420304838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_Return_ReturningDagger1_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 72
+        width: 96
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fd039118d2b72080800000000000000
+      internalID: -9212197871685530119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_Return_ReturningDagger1_Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 72
+        width: 96
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79f675ac7b0206d50800000000000000
+      internalID: 6728413817037352855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_Return_ReturningDagger1_Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 96
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86d08086460165c30800000000000000
+      internalID: 4347680513700924776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
