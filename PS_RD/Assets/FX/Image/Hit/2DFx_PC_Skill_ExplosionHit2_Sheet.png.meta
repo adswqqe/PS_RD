@@ -1,7 +1,28 @@
 fileFormatVersion: 2
 guid: 1f35626319f97484cbcebe34bb46e904
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -319273955716217931
+    second: 2DFx_PC_Skill_ExplosionHit2_Sheet_0
+  - first:
+      213: 195298064127777722
+    second: 2DFx_PC_Skill_ExplosionHit2_Sheet_1
+  - first:
+      213: -8391352172574324162
+    second: 2DFx_PC_Skill_ExplosionHit2_Sheet_2
+  - first:
+      213: -1373716804492314697
+    second: 2DFx_PC_Skill_ExplosionHit2_Sheet_3
+  - first:
+      213: 7964954685015336186
+    second: 2DFx_PC_Skill_ExplosionHit2_Sheet_4
+  - first:
+      213: -1667867572187562138
+    second: 2DFx_PC_Skill_ExplosionHit2_Sheet_5
+  - first:
+      213: 5742033591458273867
+    second: 2DFx_PC_Skill_ExplosionHit2_Sheet_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -40,7 +61,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -85,7 +106,154 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_ExplosionHit2_Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b340836706b19bf0800000000000000
+      internalID: -319273955716217931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_ExplosionHit2_Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 144
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abb58a9fd86d5b200800000000000000
+      internalID: 195298064127777722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_ExplosionHit2_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 144
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3a418888adeb8b80800000000000000
+      internalID: -8391352172574324162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_ExplosionHit2_Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 72
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b7304638d39fece0800000000000000
+      internalID: -1373716804492314697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_ExplosionHit2_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 72
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af42c6cf514398e60800000000000000
+      internalID: 7964954685015336186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_ExplosionHit2_Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 72
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66ffd53a74b8ad8e0800000000000000
+      internalID: -1667867572187562138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_ExplosionHit2_Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4a1b3bf02dcfaf40800000000000000
+      internalID: 5742033591458273867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

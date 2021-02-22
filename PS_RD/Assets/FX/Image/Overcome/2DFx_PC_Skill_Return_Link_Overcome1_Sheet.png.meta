@@ -1,7 +1,31 @@
 fileFormatVersion: 2
 guid: 6dcfeb4827da4254599a32628dd023cb
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 4150825817529986020
+    second: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_0
+  - first:
+      213: -4964072332175498263
+    second: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_1
+  - first:
+      213: 8719216266365222717
+    second: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_2
+  - first:
+      213: 7299918102984545071
+    second: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_3
+  - first:
+      213: -6740884757541681019
+    second: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_4
+  - first:
+      213: 1485327151574682098
+    second: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_5
+  - first:
+      213: 363762006290182452
+    second: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_6
+  - first:
+      213: -3807215516980467510
+    second: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -40,7 +64,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -85,7 +109,175 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 144
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4eb256ac612ba9930800000000000000
+      internalID: 4150825817529986020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 240
+        width: 144
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e3a551c3821c1bb0800000000000000
+      internalID: -4964072332175498263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 240
+        width: 144
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3fb1847ff0e00970800000000000000
+      internalID: 8719216266365222717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120
+        width: 144
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2356d986d48e4560800000000000000
+      internalID: 7299918102984545071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 120
+        width: 144
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58802ea17019372a0800000000000000
+      internalID: -6740884757541681019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 120
+        width: 144
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f90adcbc21fc9410800000000000000
+      internalID: 1485327151574682098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 144
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 431b5bf0e975c0500800000000000000
+      internalID: 363762006290182452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2DFx_PC_Skill_Return_Link_Overcome1_Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 144
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac82607a8ad0a2bc0800000000000000
+      internalID: -3807215516980467510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
