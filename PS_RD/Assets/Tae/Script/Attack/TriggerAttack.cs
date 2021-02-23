@@ -82,9 +82,6 @@ public class TriggerAttack : AttackBase
                 {
                     item.GetComponent<UnitBase>().Hit(damage);
                 }
-
-                //EffectManager.Instance.PlayEffect("Hit", item.transform.position);
-                break;
             }
         }
     }

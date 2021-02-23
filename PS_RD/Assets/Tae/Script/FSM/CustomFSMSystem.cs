@@ -254,14 +254,14 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
                     _attackIndex = _nextAttackIndex;
                 }
 
-                Debug.Log("_nextAttackIndex : " + _nextAttackIndex);
-                Debug.Log("_attackIndex : " + _attackIndex);
+                //Debug.Log("_nextAttackIndex : " + _nextAttackIndex);
+                //Debug.Log("_attackIndex : " + _attackIndex);
                 SystemMgr.Unit.curAttackIndex = _attackIndex;
                 SystemMgr.Unit.CurAniState = _attackAniIndex[_attackIndex];
             }
             else
             {
-                Debug.Log("Idle");
+                //Debug.Log("Idle");
                 SystemMgr.ChangeState(CustomFSMState.Idle);
             }
         }

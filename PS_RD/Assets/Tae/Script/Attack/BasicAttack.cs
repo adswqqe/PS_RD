@@ -40,12 +40,13 @@ public class BasicAttack : AttackBase
     public override void AttackDamage()
     {
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(transform.position, boxCollider2D.size, 0.0f, _hitLayerMask);
-
+        Debug.Log("attack");
         isEnter = false;
         foreach (var item in collider2Ds)
         {
             if (item.gameObject.name.Contains("Player"))
                 continue;
+
 
             if (item.CompareTag("Enemy") /*&& item.GetComponent<UnitBase>().Status.isAlive*/)
             {

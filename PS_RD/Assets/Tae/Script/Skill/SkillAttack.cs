@@ -62,39 +62,18 @@ public class SkillAttack : AttackBase
 
                 if (isCritical)
                 {
-
+                    item.GetComponent<UnitBase>().Hit(damage * 1.5f);
                 }
                 else
                 {
-
+                    item.GetComponent<UnitBase>().Hit(damage);
                 }
 
-                if(isExSkill == false)
+                if (isExSkill == false)
                 {
 
                 }
-
-                //EffectManager.Instance.PlayEffect("Hit", item.transform.position);
-                break;
             }
-        }
-
-        if (isEnter || _testAlwaysAttackTrue)
-        {
-            //나중에 구현
-            //TimeManager.HitStop(hitStopTime);
-            //CinemachineManager.Instance.ShakeCamera(caemraShakePower, cameraShakeTime);
-            //if (isSkill)
-            //{
-            //    playSkillFxEvent?.Invoke(gameObject.name);
-            //    SoundManager.Instance.PlayFx(FxAudioSources.FX_PC_Skill_Sinsu_Damage);
-
-            //}
-            //else
-            //{
-            //    SoundManager.Instance.PlayHitFx(FxAudioHitSources.FX_PC_Attack_Hit);
-            //}
-
         }
     }
 

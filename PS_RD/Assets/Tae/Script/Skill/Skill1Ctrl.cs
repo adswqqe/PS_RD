@@ -26,6 +26,9 @@ public class Skill1Ctrl : UnitBase
     public BoxCollider2D aBoxCollider2D;
     public BoxCollider2D bBoxCollider2D;
 
+    [SerializeField]
+    float _damage = 10f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -108,9 +111,14 @@ public class Skill1Ctrl : UnitBase
             if (collision.gameObject.tag == "Player")
                 return;
 
-            isTransformB = true;
-            transform.position = new Vector3(collision.transform.position.x + (2 * dir), collision.transform.position.y, collision.transform.position.z);
-            InitTransformB();
+            if(collision.gameObject.tag == "Enemy")
+            {
+                isTransformB = true;
+                collision.GetComponent<UnitBase>().Hit(_damage);
+                transform.position = new Vector3(collision.transform.position.x + (2 * dir), collision.transform.position.y, collision.transform.position.z);
+
+                InitTransformB();
+            }
         }
         else if (isAnimationEnd == true)
         {
