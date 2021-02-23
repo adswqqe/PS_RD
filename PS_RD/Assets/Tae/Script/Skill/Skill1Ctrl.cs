@@ -80,8 +80,8 @@ public class Skill1Ctrl : UnitBase
 
     private void DestroySkill()
     {
-        playerShadow.Skill1End();
-        Destroy(this.gameObject);
+        //playerShadow.Skill1End();
+        //Destroy(this.gameObject);
     }
 
     private void InitTransformB()
