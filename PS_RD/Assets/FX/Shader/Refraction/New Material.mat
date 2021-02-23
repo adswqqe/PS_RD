@@ -10,7 +10,7 @@ Material:
   m_Name: New Material
   m_Shader: {fileID: -6465566751694194690, guid: 96bd0f966bbb82543b37e77ebdd0fa21,
     type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _111:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 8400000, guid: 4070d9c8ca91cff429e1b47960621455, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlphaTex:
@@ -41,9 +41,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_6E1752E1: 1
     - Vector1_EFAFBB5: 1
-    - Vector1_FB78174: 0.12
-    - Vector1_FFB7D581: 0.1
+    - Vector1_FB78174: 0.23
+    - Vector1_FFB7D581: 2.47
     - _EnableExternalAlpha: 0
     m_Colors:
     - Vector2_64B14B46: {r: 0.5, g: 0.5, b: 0, a: 0}
