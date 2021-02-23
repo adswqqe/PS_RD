@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletLength: 10
-  _speed: 1
+  _speed: 5
   targetLayer:
     serializedVersion: 2
     m_Bits: 1024

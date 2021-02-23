@@ -547,12 +547,12 @@ MonoBehaviour:
     enemyType: 
     bodyType: 
     minHP: 0
-    nowHP: 0
-    maxHP: 0
+    nowHP: 270
+    maxHP: 270
     DEF: 0
-    minAtk: 1
-    maxAtk: 10
-    moveSpeed: 1
+    minAtk: 10
+    maxAtk: 15
+    moveSpeed: 3
     jumpPower: 0
     shotSpeed: 0
     attackMove: 0
@@ -607,10 +607,10 @@ MonoBehaviour:
   _lookDir: {x: 0, y: 0, z: 0}
   _viewAngle: 0
   _chaseDistance: 0
-  _searchCircleRadius: 0
-  _searchCircleOffset: 0
-  _attackDistance: 0
-  _attakcTick: 0
+  _searchCircleRadius: 8
+  _searchCircleOffset: 6
+  _attackDistance: 6
+  _attakcTick: 1
 --- !u!50 &2306170667230961796
 Rigidbody2D:
   serializedVersion: 4

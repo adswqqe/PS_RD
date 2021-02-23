@@ -45,7 +45,11 @@ namespace EnemyKobold
         private float _attakcTick;
 
         private bool _isAttacked = false;
-        public bool IsAttacked { get { return _isAttacked; } set { _isAttacked = value; } }
+        public bool IsAttacked
+        {
+            get { if (_isAttacked) { _isAttacked = false; return true; } return false; }
+            set { _isAttacked = value; }
+        }
 
 
         private void Update()
@@ -67,6 +71,7 @@ namespace EnemyKobold
             _curState = KoboldSM.idleState;
             ChangeState(idleState); 
             _angleCos = Mathf.Cos(_viewAngle / 360 * Mathf.PI);
+            _lookDir = Vector3.left;
         }
 
         public void ChangeState(BaseState state)
@@ -120,11 +125,13 @@ namespace EnemyKobold
             {
                 light.transform.localPosition = new Vector3(0.2f, 0.19f, 0f);
                 light.transform.localRotation = Quaternion.Euler(0f, 0f, -90f);
+                _lookDir = Vector3.right;
             }
             else
             {
                 light.transform.localPosition = new Vector3(-0.2f, 0.19f, 0f);
                 light.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
+                _lookDir = Vector3.left;
             }
         }
 
@@ -263,12 +270,11 @@ namespace EnemyKobold
             if (_attackDelay > 3)
             {
                 fsm.anim.ChangeAnim(KoboldAnim.Attack);
-                if (fsm.IsAttacked)
-                {
-                    fsm.unit.Attack();
-                    fsm.IsAttacked = false;
-                }
                 _attackDelay = 0;
+            }
+            if (fsm.IsAttacked)
+            {
+                fsm.unit.Attack();
             }
 
             fsm.SetDirection(fsm.unit.Target.transform.position.x > fsm.transform.position.x);
