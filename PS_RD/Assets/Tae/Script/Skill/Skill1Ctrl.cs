@@ -26,6 +26,7 @@ public class Skill1Ctrl : UnitBase
     public BoxCollider2D aBoxCollider2D;
     public BoxCollider2D bBoxCollider2D;
 
+    bool _isOverCome = false;
     [SerializeField]
     float _damage = 10f;
 
@@ -97,6 +98,7 @@ public class Skill1Ctrl : UnitBase
     {
         _animator.SetInteger("State", 2);
         _playerTr.GetComponent<Unit>().Skill1Ex();
+        _isOverCome = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -124,6 +126,8 @@ public class Skill1Ctrl : UnitBase
         {
             if(collision.gameObject.tag == "Player")
             {
+                if (_isOverCome == true)
+                    return;
                 collision.gameObject.GetComponent<Unit>().Hit(150);
                 collision.gameObject.GetComponent<Unit>().SlowStateStart();
             }
