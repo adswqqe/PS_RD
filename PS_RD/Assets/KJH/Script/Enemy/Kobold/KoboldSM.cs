@@ -294,8 +294,10 @@ namespace EnemyKobold
 
         public override void enter(KoboldSM fsm)
         {
-            fsm.anim.ChangeAnim(KoboldAnim.Hit1);
-            //fsm.anim.ChangeAnim(KoboldAnim.Hit2);
+            if (Random.value > 0.5)
+                fsm.anim.ChangeAnim(KoboldAnim.Hit1);
+            else
+                fsm.anim.ChangeAnim(KoboldAnim.Hit2);
 
             _stunTime = 0;
             Debug.Log("Kobold Damage State start");
@@ -304,7 +306,7 @@ namespace EnemyKobold
         public override void process(KoboldSM fsm)
         {
             _stunTime += Time.deltaTime;
-            if(_stunTime >= 10)
+            if(_stunTime >= 1.5)
             {
                 fsm.ChangeState(KoboldSM.idleState);
             }
