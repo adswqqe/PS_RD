@@ -11,6 +11,7 @@ public class AnimationEventListener : MonoBehaviour
 
     public void EventCall(int index)
     {
+        Debug.Log("index : " + index + " Name : " + gameObject.name);
         if (index >= 00 && index < _events.Length)
         {
             _events[index].Invoke();

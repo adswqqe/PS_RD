@@ -6,19 +6,19 @@ namespace EnemyKobold
 {
     public class KoboldAnimationEventListener : MonoBehaviour
     {
-        private Kobold _kobold;
+        private KoboldSM _koboldSM;
         private KoboldAnimCtrl _anim;
 
     private void Awake()
         {
-            _kobold = GetComponentInParent<Kobold>();
+            _koboldSM = GetComponentInParent<KoboldSM>();
             _anim = GetComponentInParent<KoboldAnimCtrl>();
         }
 
         public void AnimEvent_Attack()
         {
-            if (_kobold)
-                _kobold.Attack();
+            if (_koboldSM)
+                _koboldSM.IsAttacked = true;
         }
 
         public void AnimEvent_AttackEnd()

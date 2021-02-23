@@ -62,7 +62,7 @@ public class Kobold : UnitBase
 
     public override void Move(float deltaX)
     {
-        _horizonalSpeed = deltaX;
+        _horizonalSpeed = stat.moveSpeed * deltaX;
     }
 
     public override void Attack()
@@ -117,6 +117,11 @@ public class Kobold : UnitBase
         { 
             return nextGroundCheckCollider[1].IsTouchingLayers(groundLayer) || !nextGroundCheckCollider[3].IsTouchingLayers(groundLayer);
         }
+    }
+
+    public void SetDirection(bool isRight)
+    {
+
     }
 }
 
