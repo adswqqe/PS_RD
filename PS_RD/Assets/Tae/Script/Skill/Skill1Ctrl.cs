@@ -13,6 +13,8 @@ public class Skill1Ctrl : UnitBase
     public Rigidbody2D _rigid2D;
     Vector2 spawnPos;
     float moveX = 4.0f;
+
+    [SerializeField]
     float moveSpped = 5.0f;
     float dir = 0;
     public bool isTransformB = false;
