@@ -18,6 +18,10 @@ public class Boss : UnitBase
 
     private float _horizonalSpeed;
     public ContactFilter2D filter2D;
+    public float HorizonSpeed
+    {
+        get { return _horizonalSpeed; }
+    }
 
 
     [SerializeField]

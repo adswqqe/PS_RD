@@ -37,6 +37,11 @@ public class AnimCtrl : MonoBehaviour
         _animator.speed = Time.timeScale;
     }
 
+    public void SetSpeed(float speed)
+    {
+        _animator.speed = speed;
+    }
+
     public void SetDirection(bool isRight)
     {
         if (isRight)

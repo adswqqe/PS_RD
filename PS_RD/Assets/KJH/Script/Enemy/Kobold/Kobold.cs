@@ -27,6 +27,10 @@ public class Kobold : UnitBase
     {
         get{ return !CheckMovable(_horizonalSpeed > 0); }
     }
+    public float HorizonSpeed
+    {
+        get { return _horizonalSpeed; }
+    }
 
     [SerializeField]
     private UnitBase _target;
