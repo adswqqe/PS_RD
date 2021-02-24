@@ -417,7 +417,7 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
         public override void StartState()
         {
-            SystemMgr.Unit.CurAniState = AniState.Dash;
+            SystemMgr.Unit.CurAniState = AniState.Backstep;
             SystemMgr.Unit.Backstep();
         }
 

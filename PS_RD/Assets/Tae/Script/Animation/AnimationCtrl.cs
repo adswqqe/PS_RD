@@ -17,6 +17,7 @@ public enum AniState
     Attack3,
     JumpAttack,
     Skll1,
+    Backstep,
 }
 
 public enum ShadowAniState // 50~
