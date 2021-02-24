@@ -189,11 +189,21 @@ namespace EnemyBoss
                 _curAttackOrder = 0;
             }
             _curAttackOrder = _curAttackOrder % _attackList[fsm.CurPhase].Count;
-            fsm.anim.ChangeAnim(BossAnim.Walk);
         }
 
         public override void process(BossSM fsm)
         {
+            if (fsm.unit.HorizonSpeed == 0)
+            {
+                fsm.anim.SetSpeed(1);
+                fsm.anim.ChangeAnim(BossAnim.Idle);
+            }
+            else
+            {
+                fsm.anim.SetSpeed(fsm.unit.HorizonSpeed / fsm.unit.stat.moveSpeed);
+                fsm.anim.ChangeAnim(BossAnim.Walk);
+            }
+
             if (fsm.CheckAttackable())
             {
                 fsm.ChangeState(_attackList[fsm.CurPhase][_curAttackOrder]);
@@ -216,6 +226,7 @@ namespace EnemyBoss
         public override void exit(BossSM fsm)
         {
             fsm.unit.Idle();
+            fsm.anim.SetSpeed(1);
             fsm.anim.ChangeAnim(BossAnim.Idle);
         }
     }

@@ -76,7 +76,7 @@ namespace EnemyKobold
 
         public void ChangeState(BaseState state)
         {
-            _curState.exit();
+            _curState.exit(this);
             _curState = state;
             _curState.enter(this);
         }
@@ -152,7 +152,7 @@ namespace EnemyKobold
     {
         public abstract void enter(KoboldSM fsm);
         public abstract void process(KoboldSM fsm);
-        public abstract void exit();
+        public abstract void exit(KoboldSM fsm);
     }
 
     public class IdleState : BaseState
@@ -172,7 +172,7 @@ namespace EnemyKobold
             }
         }
 
-        public override void exit()
+        public override void exit(KoboldSM fsm)
         {
         }
     }
@@ -196,11 +196,16 @@ namespace EnemyKobold
 
         public override void process(KoboldSM fsm)
         {
-            if (_returnTime > 0)
+            if (fsm.unit.HorizonSpeed == 0)
+            {
+                fsm.anim.SetSpeed(1);
                 fsm.anim.ChangeAnim(KoboldAnim.Idle);
+            }
             else
+            {
+                fsm.anim.SetSpeed(fsm.unit.HorizonSpeed / fsm.unit.stat.moveSpeed);
                 fsm.anim.ChangeAnim(KoboldAnim.Run);
-
+            }
             fsm.SetDirection(_targetPosition.x > fsm.transform.position.x);
 
             if (fsm.CheckAttackable())
@@ -248,8 +253,9 @@ namespace EnemyKobold
             }
         }
 
-        public override void exit()
+        public override void exit(KoboldSM fsm)
         {
+            fsm.anim.SetSpeed(1);
         }
     }
 
@@ -283,7 +289,7 @@ namespace EnemyKobold
                 fsm.ChangeState(fsm.chaseState);
         }
 
-        public override void exit()
+        public override void exit(KoboldSM fsm)
         {
         }
     }
@@ -312,7 +318,7 @@ namespace EnemyKobold
             }
         }
 
-        public override void exit()
+        public override void exit(KoboldSM fsm)
         {
         }
     }
@@ -330,7 +336,7 @@ namespace EnemyKobold
         {
         }
 
-        public override void exit()
+        public override void exit(KoboldSM fsm)
         {
         }
     }
