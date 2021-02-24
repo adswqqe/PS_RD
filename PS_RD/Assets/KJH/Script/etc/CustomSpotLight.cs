@@ -14,6 +14,8 @@ public class CustomSpotLight : MonoBehaviour
         Assert.IsNotNull(light);
     }
 
+
+
     public bool InLight(Vector3 pos)
     {
         float radian = transform.rotation.eulerAngles.z * Mathf.PI / 180.0f;

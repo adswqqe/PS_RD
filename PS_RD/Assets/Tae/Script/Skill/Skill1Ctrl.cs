@@ -47,6 +47,10 @@ public class Skill1Ctrl : UnitBase
         spawnPlayerPos = _playerTr.position;
         spawnPos = transform.position;
         this.dir = dir;
+        Debug.Log("dir : " + dir);
+        if(dir <= 0)
+            transform.Rotate(0.0f, 180.0f, 0.0f);
+
         this.playerShadow = playerShadow;
         isInit = true;
     }
@@ -56,6 +60,9 @@ public class Skill1Ctrl : UnitBase
     {
         if (isInit == false)
             return;
+
+        //if (_isOverCome == true)
+        //    return;
 
         if (isTransformB == false)
         {
@@ -101,6 +108,7 @@ public class Skill1Ctrl : UnitBase
         _animator.SetInteger("State", 2);
         _playerTr.GetComponent<Unit>().Skill1Ex();
         _isOverCome = true;
+        _rigid2D.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
