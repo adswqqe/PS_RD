@@ -8,13 +8,50 @@ public class CustomSpotLight : MonoBehaviour
 {
     private Light2D light;
 
+    public LayerMask layerMask;
+    private PlayerShadowUnit shadowUnit;
+    bool isFrist = true;
+    bool isHit = false;
+    RaycastHit2D hit;
     private void Awake()
     {
         light = GetComponent<Light2D>();
         Assert.IsNotNull(light);
     }
 
+    private void Update()
+    {
+        if (transform.rotation.z >= 0)
+             hit = Physics2D.Raycast(transform.position, Vector3.left, 5.0f, layerMask);
+        else
+            hit = Physics2D.Raycast(transform.position, Vector3.right, 5.0f, layerMask);
 
+
+        if (hit.collider != null)
+        {
+            if(hit.collider.tag == "Shadow")
+            {
+                isHit = true;
+                Debug.Log(hit.collider.name);
+                if (isFrist)
+                {
+                    shadowUnit = hit.collider.GetComponent<PlayerShadowUnit>();
+                    shadowUnit.LightDetection();
+                    isFrist = false;
+                }
+                //if(InLight(hit.collider.GetComponent<Transform>().position))
+                //{
+                //}
+            }
+        }
+
+        if(hit.collider == null)
+        {
+            isFrist = true;
+            shadowUnit.Skill1End();
+            shadowUnit = null;
+        }
+    }
 
     public bool InLight(Vector3 pos)
     {

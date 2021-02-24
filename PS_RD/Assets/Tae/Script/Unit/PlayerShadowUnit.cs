@@ -26,6 +26,7 @@ public class PlayerShadowUnit : UnitBase
     {
         _playerUnit = GetComponentInParent<Unit>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        OutOfControl();
     }
 
     public override void Progress()
@@ -85,8 +86,14 @@ public class PlayerShadowUnit : UnitBase
 
     public void OutOfControl()
     {
+        Debug.Log("ASDASDSA");
         AniCtrl.PlayAni(shadowAniState);
         isControlAble = false;
+    }
+
+    public void LightDetection()
+    {
+        OnLightDetectionAction?.Invoke();
     }
 
     public void ControlRecovery()
