@@ -301,7 +301,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
 
     private class JumpState : CustomFSMStateBase
     {
-        float _addJumpPower = 3.0f;
+        float _jumpPower = 10.0f;
+        float _addJumpPower = 1.0f;
         float _doubleJumpPower = 4.0f;
         float _jumpTimeCounter = 0.1f;
         int _jumpCount = 1;
@@ -321,8 +322,8 @@ public class CustomFSMSystem : FSMSystem<CustomFSMState, CustomFSMStateBase>
             if (SystemMgr.Unit.CoyoteTime >= 0.0f)
             {
                 _jumpTimeCounter = 0.1f;
-                SystemMgr.Unit.Jump(_addJumpPower);
-                _addJumpPower = 0.2f;
+                SystemMgr.Unit.Jump(_jumpPower);
+                _addJumpPower = 1.0f;
                 SystemMgr.Unit.CurAniState = AniState.Jump;
                 //Debug.Log("JumpState Start");
             }

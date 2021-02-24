@@ -169,6 +169,7 @@ public class Unit : UnitBase
 
     public void HitKnockBack()
     {
+        _velocity = Vector2.zero;
         _rigid2D.MovePosition(new Vector2(transform.position.x - (0.5f * _facingDir), transform.position.y + 0.5f));
     }
 
