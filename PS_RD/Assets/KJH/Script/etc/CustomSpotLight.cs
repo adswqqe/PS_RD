@@ -47,6 +47,9 @@ public class CustomSpotLight : MonoBehaviour
 
         if(hit.collider == null)
         {
+            if (shadowUnit == null)
+                return;
+
             isFrist = true;
             shadowUnit.Skill1End();
             shadowUnit = null;
