@@ -54,8 +54,6 @@ public class TriggerAttack : AttackBase
         isEnter = false;
         foreach (var item in collider2Ds)
         {
-            Debug.Log(item.name);
-
             if (item.gameObject.name.Contains("Player"))
                 continue;
 

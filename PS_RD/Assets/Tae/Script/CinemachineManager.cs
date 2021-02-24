@@ -55,7 +55,6 @@ public class CinemachineManager : MonoBehaviour
         {
             if (_shakeTimer >= 0.0f)
             {
-                Debug.Log(_shakeTimer);
                 _shakeTimer -= 0.02f;
                 cinemachineBasicMultiChannelPerlin.m_AmplitudeGain =
                           Mathf.Lerp(_startingIntensity, 0f, _shakeTimer / _shakeTimerTotal);

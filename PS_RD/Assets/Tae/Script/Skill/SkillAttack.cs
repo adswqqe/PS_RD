@@ -37,9 +37,6 @@ public class SkillAttack : AttackBase
         }
 
         gameObject.SetActive(false);
-
-        Debug.Log(gameObject.name);
-        gameObject.SetActive(false);
     }
 
     public override void AttackDamage()

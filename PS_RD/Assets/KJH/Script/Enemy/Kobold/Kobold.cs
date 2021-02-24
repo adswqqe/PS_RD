@@ -104,7 +104,7 @@ public class Kobold : UnitBase
 
     private void HandleDeath()
     {
-
+        gameObject.SetActive(false);
     }
 
     private bool CheckMovable(bool isRight)
